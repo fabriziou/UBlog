@@ -1,0 +1,36 @@
+{
+  "name": "udacity-blog-161416",
+  "authors": [
+    "Teddy Thioulouse <teddy.thioulouse@outlook.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  },
+  "exportsOverride": {
+    "bootstrap-sass": {
+      "sass": ["assets/stylesheets/"],
+      "js": ["assets/javascript/bootstrap.js",
+              "assets/javascript/bootstrap.min.js"]
+    },
+    "jquery": {
+      "js": ["dist/jquery.min.js"]
+    },
+    "font-awesome": {
+      "css": ["css/*.css"],
+      "fonts": ["fonts/*"]
+    }
+  }
+}
