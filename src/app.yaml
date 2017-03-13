@@ -4,7 +4,7 @@ threadsafe: true
 
 handlers:
 - url: /.*
-  script: main.app
+  script: router.app
 
 libraries:
 - name: jinja2
