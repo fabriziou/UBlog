@@ -9,14 +9,11 @@
     <link rel="stylesheet" href="/static/css/master.css">
   </head>
   <body>
-    <header>
-      <h1>Blog</h1>
-      <nav>
-        <a href="/">Home</a> - <a href="/signup">Sign up</a>
-      </nav>
-    </header>
-    {% block content %}
-    {% endblock %}
+    {% include "commons/navbar.html" %}
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
     <script src="/static/js/jquery/jquery.min.js"></script>
     <script src="/static/js/bootstrap-sass/bootstrap.min.js"></script>
   </body>
