@@ -4,6 +4,7 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-bower-task": "^0.4.0",
+    "grunt-sass": "^2.0.0",
     "load-grunt-tasks": "^3.5.2"
   }
 }

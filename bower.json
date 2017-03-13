@@ -22,8 +22,8 @@
   "exportsOverride": {
     "bootstrap-sass": {
       "sass": ["assets/stylesheets/"],
-      "js": ["assets/javascript/bootstrap.js",
-              "assets/javascript/bootstrap.min.js"]
+      "js": ["assets/javascripts/bootstrap.js",
+              "assets/javascripts/bootstrap.min.js"]
     },
     "jquery": {
       "js": ["dist/jquery.min.js"]

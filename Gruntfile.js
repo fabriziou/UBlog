@@ -8,9 +8,14 @@ module.exports = function(grunt) {
         options: {
           targetDir: 'src/static/',
           cleanTargetDir: false,
-          layout: function(type, component, source) {
-              return type;
-          },
+          layout: 'byType',
+        }
+      }
+    },
+    sass: {
+      dist: {
+        files: {
+          'src/static/css/master.css': ['src/static/sass/master.scss']
         }
       }
     }
