@@ -1,4 +1,4 @@
-from handler import Handler
+from framework.handler import Handler
 
 class MainPage(Handler):
     def get(self):
