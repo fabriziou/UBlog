@@ -9,6 +9,12 @@ class Users(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     isDeleted = db.BooleanProperty(default=False)
 
+    @classmethod
+    def create_user(cls, email, username, password):
+        user = User(email=email, username=username, password=password)
+        user.put()
+        return user
+
     @staticmethod
     def is_email_valid(email, error=None):
         """ Check if email is valid

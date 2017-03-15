@@ -1,4 +1,5 @@
 from framework.handler import Handler
+from forms.signup import RegistrationForm
 from models.Users import Users
 
 
@@ -20,13 +21,9 @@ class SignupPage(Handler):
         datas["verify"] = self.request.get("verify")
 
         # Check valid datas
-        Users.is_email_valid(datas["email"], errors)
-        Users.is_username_valid(datas["username"], errors)
-        Users.is_password_valid(datas["password"], errors)
 
         if errors:
-            print errors
-            self.render_signup(datas=datas, errors=errors)
+            self.render_signup(datas=datas, errors=user['errors'])
         else:
             self.redirect("/")
 
