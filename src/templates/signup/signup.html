@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sign up
+{% endblock%}
+
+{% block content %}
+  <h1>Sign up</h1>
+
+  {% if errors is defined %}
+    {% for key, value in errors.items() %}
+      {{ value }}<br>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    <label for="Email">Email</label>
+    <input type="text" id="email" placeholder="Email" name="email" value="{{ datas['email'] }}">
+    <br>
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Username" name="username" value="{{ datas['username'] }}">
+    <br>
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Password" name="password" value="">
+    <br>
+    <label for="verify">Verify</label>
+    <input type="password" id="verify" placeholder="Password" name="verify" value="">
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
