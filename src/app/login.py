@@ -1,8 +1,8 @@
-from framework.handler import Handler
+from framework.request_handler import Handler
 from wtforms.validators import ValidationError
 from forms.login import LoginForm
 from models.Users import Users
-
+from framework.cookie_handler import create_cookie, cookie_is_valid
 
 class LoginPage(Handler):
     errors = {}
@@ -10,6 +10,7 @@ class LoginPage(Handler):
     def get(self):
         """Generate an empty form and render it
         """
+        print cookie_is_valid("")
         form = LoginForm()
         self.render_login(form)
 

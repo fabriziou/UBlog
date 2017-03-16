@@ -1,4 +1,4 @@
-from framework.handler import Handler
+from framework.request_handler import Handler
 
 
 class MainPage(Handler):
