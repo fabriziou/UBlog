@@ -23,6 +23,7 @@ class SignupPage(Handler):
         form = RegistrationForm(self.request.POST)
 
         if form.validate():
+            # Format datas, crypt password
             username = form.username.data.title()
             email = form.email.data.lower()
             password = Users.crypt_password(form.password.data)
