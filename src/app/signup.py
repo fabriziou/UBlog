@@ -1,52 +1,42 @@
 from framework.handler import Handler
-from forms.signup import RegistrationForm
+from forms.registration import RegistrationForm
 from models.Users import Users
 
 
 class SignupPage(Handler):
-    def render_signup(self, datas={}, errors={}):
-        self.render("signup/signup.html", datas=datas, errors=errors)
-
     def get(self):
-        self.render_signup()
+        """Generate an empty form and render it
+        """
+        form = RegistrationForm()
+        self.render_signup(form)
 
     def post(self):
-        errors = {}
-        datas = {}
+        """Validates the form
 
-        # Get datas
-        datas["email"] = self.request.get("email")
-        datas["username"] = self.request.get("username")
-        datas["password"] = self.request.get("password")
-        datas["verify"] = self.request.get("verify")
+        If the form is valid, a new user is created
+        and redirected to the main page.
 
-        # Check valid datas
-
-        if errors:
-            self.render_signup(datas=datas, errors=user['errors'])
-        else:
-            self.redirect("/")
-
-    def valid_passwords(self, password1, password2, error=None):
-        """ Check if two passwords are valid and identical.
-
-            A valid password is not empty
-
-            :param password1:
-                Password to check
-            :param password2:
-                Password to check
-            :param error:
-                If error, error["password"] will be set with an error message
-            :returns:
-                If passwords are valid and identical, we return True
-                Otherwise, we return False
+        If an error occurred, the form is displayed with
+        details of error
         """
+        # Populate the form with user inputs
+        form = RegistrationForm(self.request.POST)
 
-        if password1:
-            if password2 and password1 == password2:
-                return True
-            error["password"] = "Passwords don't match"
+        if form.validate():
+            # TODO :
+            # Format datas, username.lower(), email.lower(), crypt password
+            user = Users(username=form.username.data,
+                         email=form.email.data,
+                         password=form.password.data)
+            if user.put():
+                self.redirect("/")
         else:
-            error["password"] = "Password must not be empty"
-        return False
+            self.render_signup(form)
+
+    def render_signup(self, form):
+        """Include the form in a template and render it
+
+            :param form:
+                A :class:`Form` instance.
+        """
+        self.render("signup/signup.html", form=form)

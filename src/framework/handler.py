@@ -7,10 +7,16 @@ class Handler(RequestHandler):
     template_dir = os.path.join(
         os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)),
         'templates')
+    # autoescape = True
     jinja_env = Environment(loader=FileSystemLoader(template_dir),
                             autoescape=True)
 
     def render(self, template, **kw):
+        """Render the HTML page
+
+            :param template:
+                HTML file to render
+        """
         jinja_template = self.jinja_env.get_template(template)
         html_from_template = jinja_template.render(kw)
         self.response.out.write(html_from_template)
