@@ -23,15 +23,16 @@ class SignupPage(Handler):
         form = RegistrationForm(self.request.POST)
 
         if form.validate():
-            # TODO :
-            # Format datas, username.lower(), email.lower(), crypt password
-            user = Users(username=form.username.data,
-                         email=form.email.data,
-                         password=form.password.data)
+            username = form.username.data.title()
+            email = form.email.data.lower()
+            password = Users.crypt_password(form.password.data)
+
+            user = Users(username=username,
+                         email=email,
+                         password=password)
             if user.put():
                 self.redirect("/")
-        else:
-            self.render_signup(form)
+        self.render_signup(form)
 
     def render_signup(self, form):
         """Include the form in a template and render it
