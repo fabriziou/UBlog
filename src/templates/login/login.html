@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-Sign up
+Log in
 {% endblock%}
 
 {% block content %}
   <h1>Log in</h1>
 
+  {% if errors %}
+    {% for key, value in errors.items() %}
+        {{ value }}
+    {% endfor %}
+  {% endif %}
   <form method="post">
     {{ form.email.label }}
     {{ form.email() }}

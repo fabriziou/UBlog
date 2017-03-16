@@ -11,9 +11,14 @@ class Users(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     isDeleted = db.BooleanProperty(default=False)
 
+    @classmethod
+    def get_by_email(cls, email):
+        return cls.all().filter("email", email.lower()).get()
+
     @staticmethod
-    def crypt_password(password):
-        random_bytes = urandom(64)
-        salt = b64encode(random_bytes).decode('utf-8')
+    def crypt_password(password, salt=None):
+        if not salt:
+            random_bytes = urandom(64)
+            salt = b64encode(random_bytes).decode('utf-8')
         hashed_password = salt + sha256(salt + password).hexdigest()
         return hashed_password
