@@ -11,7 +11,7 @@ class SignupPage(Handler):
         self.render_signup(form)
 
     def post(self):
-        """Validates the form
+        """Validate the form
 
         If the form is valid, a new user is created
         and redirected to the main page.

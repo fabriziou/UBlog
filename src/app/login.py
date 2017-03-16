@@ -2,7 +2,8 @@ from framework.request_handler import Handler
 from wtforms.validators import ValidationError
 from forms.login import LoginForm
 from models.Users import Users
-from framework.cookie_handler import create_cookie, cookie_is_valid
+from framework.cookie_handler import create_cookie
+
 
 class LoginPage(Handler):
     errors = {}
@@ -10,24 +11,32 @@ class LoginPage(Handler):
     def get(self):
         """Generate an empty form and render it
         """
-        print cookie_is_valid("")
+        # Logged users not authorized to see this page
+        if self.user_is_logged():
+            self.redirect("/")
+
         form = LoginForm()
         self.render_login(form)
 
     def post(self):
-        """Validates the form
+        """Validate the form
 
         If the form is valid, the user is logged
 
-        If an error occurred, the form is displayed with
+        If an error occurred, login form is displayed with
         details of error
         """
         # Populate the form with user inputs
         form = LoginForm(self.request.POST)
 
         if form.validate():
-            if self.valid_login_credentials(form.email.data,
-                                            form.password.data):
+            # Check in Datastore if user exists
+            user_id = self.valid_login_credentials(form.email.data,
+                                                   form.password.data)
+            if user_id:
+                # Cookie creation and redirection
+                self.response.headers.add_header("Set-Cookie",
+                                                 create_cookie("uid", user_id))
                 self.redirect("/")
 
         self.render_login(form)
@@ -40,7 +49,7 @@ class LoginPage(Handler):
             :param password:
                 Password of the user
             :returns:
-                If a user is found, we return True
+                If a user is found, we return his ID
                 Otherwise, we return False
         """
         user = Users.get_by_email(email)
@@ -51,7 +60,7 @@ class LoginPage(Handler):
             password_hashed = Users.crypt_password(password,
                                                    salt)
             if password_hashed == user.password:
-                return True
+                return user.key().id()
             else:
                 self.errors["IncorrectPassword"] = "Password doesn't match"
         else:

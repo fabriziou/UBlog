@@ -4,7 +4,7 @@ SECRET = "c52a080297afefc1d4bf781951eb6735b6496c3af379e4b46d6b941a993f20ed"
 
 
 def hash_value(value):
-    """ Hash the value with the SECRET key
+    """Hash the value with the SECRET key
 
         :param value:
             String to hash
@@ -15,7 +15,7 @@ def hash_value(value):
 
 
 def create_cookie(name, value, path="Path=/"):
-    """ Create, hash the cookie content and return it
+    """Create, hash the cookie content and return it
 
         :param name:
             Name of the cookie
@@ -28,12 +28,12 @@ def create_cookie(name, value, path="Path=/"):
     """
     value = str(value)
     hashed_value = hash_value(value)
-    content = "%s|%s" % (hash_value, value)
+    content = "%s|%s" % (hashed_value, value)
     return "%s=%s, %s" % (name, content, path)
 
 
-def cookie_is_valid(content):
-    """ Validate if cookie is valid
+def read_cookie(content):
+    """Validate if cookie is valid and return its value
 
         :param content:
             Content of the cookie
