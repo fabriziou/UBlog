@@ -8,16 +8,14 @@ from framework.cookie_handler import create_cookie
 class LoginPage(Handler):
     errors = {}
 
+    @Handler.logout_required
     def get(self):
         """Generate an empty form and render it
         """
-        # Logged users not authorized to see this page
-        if self.user_is_logged():
-            self.redirect("/")
-
         form = LoginForm()
         self.render_login(form)
 
+    @Handler.logout_required
     def post(self):
         """Validate the form
 
@@ -37,7 +35,7 @@ class LoginPage(Handler):
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
                                                  create_cookie("uid", user_id))
-                self.redirect("/")
+                self.redirect(self.uri_for("home"))
 
         self.render_login(form)
 

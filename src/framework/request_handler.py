@@ -29,3 +29,21 @@ class Handler(RequestHandler):
         if auth_cookie:
             return read_cookie(auth_cookie)
         return None
+
+    @staticmethod
+    def login_required(func):
+        def redirect_visitor(self):
+            if not self.user_is_logged():
+                self.redirect(self.uri_for("login"))
+            else:
+                return func(self)
+        return redirect_visitor
+
+    @staticmethod
+    def logout_required(func):
+        def redirect_logged_user(self):
+            if self.user_is_logged():
+                self.redirect(self.uri_for("home"))
+            else:
+                return func(self)
+        return redirect_logged_user
