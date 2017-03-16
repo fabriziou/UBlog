@@ -32,6 +32,8 @@ class Handler(RequestHandler):
 
     @staticmethod
     def login_required(func):
+        """ Redirect user to login page if he is not connected
+        """
         def redirect_visitor(self):
             if not self.user_is_logged():
                 self.redirect(self.uri_for("login"))
@@ -41,6 +43,8 @@ class Handler(RequestHandler):
 
     @staticmethod
     def logout_required(func):
+        """ Redirect user to home page if he is connected
+        """
         def redirect_logged_user(self):
             if self.user_is_logged():
                 self.redirect(self.uri_for("home"))

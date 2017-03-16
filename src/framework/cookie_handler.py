@@ -29,7 +29,7 @@ def create_cookie(name, value, path="Path=/"):
     value = str(value)
     hashed_value = hash_value(value)
     content = "%s|%s" % (hashed_value, value)
-    return "%s=%s, %s" % (name, content, path)
+    return "%s=%s; %s" % (name, content, path)
 
 
 def read_cookie(content):
