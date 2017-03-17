@@ -15,9 +15,7 @@ class LoginPage(Handler):
 
     @Handler.login_required(False)
     def post(self):
-        """Validate the form
-
-        If the form is valid, the user is logged
+        """If the form is valid, the user is logged
 
         If an error occurred, login form is displayed with
         details of error

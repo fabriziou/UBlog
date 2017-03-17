@@ -14,6 +14,19 @@ class Users(db.Model):
 
     @classmethod
     def new_user(cls, email, username, password):
+        """ Create a new user in Datastore
+            Datas are formated before insertion.
+
+            :param email:
+                User's email
+            :param username:
+                User's username
+            :param password:
+                User's password (not hashed)
+            :returns:
+                If successful, an instance of Users is returned
+                Otherwise, None is returned
+        """
         # Format datas, crypt password
         username = username.title()
         email = email.lower()
@@ -23,7 +36,6 @@ class Users(db.Model):
                    email=email,
                    password=password)
         return user.put()
-
 
     @classmethod
     def get_by_email(cls, email):

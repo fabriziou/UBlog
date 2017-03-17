@@ -11,18 +11,25 @@ class PostsPage(Handler):
 
 class AddPostPage(Handler):
     def get(self):
+        """Generate an empty form and render it
+        """
         form = PostForm()
         self.render_addpost(form)
 
     def post(self):
+        """If the form is valid, the post is created
+        and user is redirected to home page
+
+        If an error occurred, form is displayed with
+        details of error
+        """
         form = PostForm(self.request.POST)
 
-        print self.user.key()
         if form.validate():
+            # Post creation
             if Posts.new_post(form.title.data, form.content.data,
                               self.user.key()):
                 self.redirect(self.uri_for("home"))
-
         self.render_addpost(form)
 
     def render_addpost(self, form):

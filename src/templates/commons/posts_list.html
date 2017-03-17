@@ -1,0 +1,10 @@
+{% if posts %}
+  {% for post in posts %}
+    {{ post.title }}
+    <br>
+    {{ post.content }}
+    <br>
+    Created by {{ post.user.username }} on {{ post.creation_date }}
+    <hr>
+  {% endfor %}
+{% endif %}
