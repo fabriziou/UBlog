@@ -2,7 +2,7 @@ from framework.request_handler import Handler
 
 
 class LogoutPage(Handler):
-    @Handler.login_required
+    @Handler.login_required(True)
     def get(self):
         """Create an empty cookie and redirect to home
         """

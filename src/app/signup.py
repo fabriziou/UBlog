@@ -4,14 +4,14 @@ from models.Users import Users
 
 
 class SignupPage(Handler):
-    @Handler.logout_required
+    @Handler.login_required(False)
     def get(self):
         """Generate an empty form and render it
         """
         form = RegistrationForm()
         self.render_signup(form)
 
-    @Handler.logout_required
+    @Handler.login_required(False)
     def post(self):
         """Validate the form
 

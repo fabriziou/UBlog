@@ -8,14 +8,14 @@ from framework.cookie_handler import create_cookie
 class LoginPage(Handler):
     errors = {}
 
-    @Handler.logout_required
+    @Handler.login_required(False)
     def get(self):
         """Generate an empty form and render it
         """
         form = LoginForm()
         self.render_login(form)
 
-    @Handler.logout_required
+    @Handler.login_required(False)
     def post(self):
         """Validate the form
 
