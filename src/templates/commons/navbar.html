@@ -6,6 +6,8 @@
      </div>
      <ul class="nav navbar-nav navbar-right">
         {% if user %}
+        <li><a href="/posts/add">New Post</a></li>
+        <li><a href="#">{{ user.username }}</a></li>
         <li><a href="/logout">Logout</a></li>
         {% else %}
         <li><a href="/login">Login</a></li>
