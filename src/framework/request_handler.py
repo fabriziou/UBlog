@@ -1,7 +1,7 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 from webapp2 import RequestHandler
-from framework.cookie_handler import read_cookie
+from models.Users import Users
 
 
 class Handler(RequestHandler):
@@ -12,6 +12,11 @@ class Handler(RequestHandler):
     jinja_env = Environment(loader=FileSystemLoader(template_dir),
                             autoescape=True)
 
+    def __init__(self, request=None, response=None):
+        RequestHandler.__init__(self, request, response)
+        # Retrieve user by his cookie
+        self.user = Users.get_by_cookie(self.request.cookies.get("uid"))
+
     def render(self, template, **kw):
         """Render the HTML page
 
@@ -19,23 +24,16 @@ class Handler(RequestHandler):
                 HTML file to render
         """
         jinja_template = self.jinja_env.get_template(template)
-        html_from_template = jinja_template.render(kw)
+        html_from_template = jinja_template.render(kw, user=self.user)
         self.response.out.write(html_from_template)
-
-    def user_is_logged(self):
-        """Check if user is logged in
-        """
-        auth_cookie = self.request.cookies.get("uid")
-        if auth_cookie:
-            return read_cookie(auth_cookie)
-        return None
 
     @staticmethod
     def login_required(func):
         """ Redirect user to login page if he is not connected
+            If logged in, we save an instance of Users
         """
         def redirect_visitor(self):
-            if not self.user_is_logged():
+            if not self.user:
                 self.redirect(self.uri_for("login"))
             else:
                 return func(self)
@@ -46,7 +44,7 @@ class Handler(RequestHandler):
         """ Redirect user to home page if he is connected
         """
         def redirect_logged_user(self):
-            if self.user_is_logged():
+            if self.user:
                 self.redirect(self.uri_for("home"))
             else:
                 return func(self)

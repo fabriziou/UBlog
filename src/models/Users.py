@@ -2,6 +2,7 @@ from google.appengine.ext import db
 from hashlib import sha256
 from base64 import b64encode
 from os import urandom
+from framework.cookie_handler import read_cookie
 
 
 class Users(db.Model):
@@ -13,10 +14,43 @@ class Users(db.Model):
 
     @classmethod
     def get_by_email(cls, email):
+        """Retrieve user by its email
+
+            :param email:
+                Email of the user
+            :returns:
+                If successful, an instance of Users is returned
+                Otherwise, None is returned
+        """
         return cls.all().filter("email", email.lower()).get()
+
+    @classmethod
+    def get_by_cookie(cls, cookie):
+        """Retrieve user by his cookie
+
+            :param cookie:
+                Cookie that contains the user id
+            :returns:
+                If successful, an instance of Users is returned
+                Otherwise, None is returned
+        """
+        if cookie:
+            uid = int(read_cookie(cookie))
+            if uid:
+                return cls.get_by_id(uid)
+        return None
 
     @staticmethod
     def crypt_password(password, salt=None):
+        """Crypt password with salt
+
+            :param password:
+                Password to crypt
+            :param salt:
+                String of chars
+            :returns:
+                Return the hashed password
+        """
         if not salt:
             random_bytes = urandom(64)
             salt = b64encode(random_bytes).decode('utf-8')
