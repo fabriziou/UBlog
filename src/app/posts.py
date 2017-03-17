@@ -3,15 +3,17 @@ from forms.post import PostForm
 from models.Posts import Posts
 
 
-# UNUSED #
 class PostsPage(Handler):
     def get(self):
-        self.render("home/home.html")
+        """ Get all user's posts and render them
+        """
+        posts = Posts.all().filter("user", self.user.key()).order("-creation_date")
+        self.render("posts/posts.html", posts=posts)
 
 
 class AddPostPage(Handler):
     def get(self):
-        """Generate an empty form and render it
+        """Generate an empty form to add a post and render it
         """
         form = PostForm()
         self.render_addpost(form)
