@@ -1,4 +1,5 @@
 from framework.request_handler import Handler
+from framework.cookie_handler import create_cookie
 from forms.registration import RegistrationForm
 from models.Users import Users
 
@@ -25,16 +26,14 @@ class SignupPage(Handler):
         form = RegistrationForm(self.request.POST)
 
         if form.validate():
-            # Format datas, crypt password
-            username = form.username.data.title()
-            email = form.email.data.lower()
-            password = Users.crypt_password(form.password.data)
-
-            user = Users(username=username,
-                         email=email,
-                         password=password)
-            if user.put():
-                self.redirect("/")
+            user = Users.new_user(form.email.data, form.username.data,
+                                  form.password.data)
+            if user:
+                # Cookie creation and redirection
+                self.response.headers.add_header("Set-Cookie",
+                                                 create_cookie("uid",
+                                                               user.id()))
+                self.redirect(self.uri_for("home"))
         self.render_signup(form)
 
     def render_signup(self, form):

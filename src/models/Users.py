@@ -9,8 +9,21 @@ class Users(db.Model):
     username = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-    isDeleted = db.BooleanProperty(default=False)
+    creation_date = db.DateTimeProperty(auto_now_add=True)
+    is_deleted = db.BooleanProperty(default=False)
+
+    @classmethod
+    def new_user(cls, email, username, password):
+        # Format datas, crypt password
+        username = username.title()
+        email = email.lower()
+        password = cls.crypt_password(password)
+
+        user = cls(username=username,
+                   email=email,
+                   password=password)
+        return user.put()
+
 
     @classmethod
     def get_by_email(cls, email):

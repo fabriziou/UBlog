@@ -6,8 +6,6 @@ from framework.cookie_handler import create_cookie
 
 
 class LoginPage(Handler):
-    errors = {}
-
     @Handler.login_required(False)
     def get(self):
         """Generate an empty form and render it
@@ -71,4 +69,4 @@ class LoginPage(Handler):
             :param form:
                 A :class:`Form` instance.
         """
-        self.render("login/login.html", form=form, errors=self.errors)
+        self.render("login/login.html", form=form)

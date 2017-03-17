@@ -14,6 +14,8 @@ class Handler(RequestHandler):
 
     def __init__(self, request=None, response=None):
         RequestHandler.__init__(self, request, response)
+
+        self.errors = {}
         # Retrieve user by his cookie
         self.user = Users.get_by_cookie(self.request.cookies.get("uid"))
 
@@ -24,7 +26,8 @@ class Handler(RequestHandler):
                 HTML file to render
         """
         jinja_template = self.jinja_env.get_template(template)
-        html_from_template = jinja_template.render(kw, user=self.user)
+        html_from_template = jinja_template.render(kw, errors=self.errors,
+                                                   user=self.user)
         self.response.out.write(html_from_template)
 
     @staticmethod
