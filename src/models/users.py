@@ -62,7 +62,6 @@ class Users(db.Model):
         if cookie:
             user_key = read_cookie(cookie)
             if user_key:
-                print user_key
                 return cls.get(user_key)
         return None
 

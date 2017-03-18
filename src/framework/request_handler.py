@@ -18,7 +18,6 @@ class Handler(RequestHandler):
         self.errors = {}
         # Retrieve user by his cookie
         self.user = Users.get_by_cookie(self.request.cookies.get("uid"))
-        print self.user
 
     def render(self, template, **kw):
         """Render the HTML page
