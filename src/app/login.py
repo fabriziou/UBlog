@@ -31,7 +31,7 @@ class LoginPage(Handler):
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
                                                  create_cookie("uid", user_id))
-                self.redirect(self.uri_for("home"))
+                self.redirect_to("home")
 
         self.render_login(form)
 

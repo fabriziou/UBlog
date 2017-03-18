@@ -5,7 +5,7 @@
         <h3><a href="/posts/edit/{{ post.key().id() }}">Edit</a></h3>
       {% endif %}
     {% endif %}
-    <a href="/post/view/{{ post.key().id() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
+    <a href="/posts/view/{{ post.key().id() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
     <br>
     {{ post.content }}
     <br>

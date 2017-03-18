@@ -16,9 +16,15 @@ class Posts(db.Model):
         return post.put()
 
     @classmethod
-    def get_by_user(cls, user, order_by="-creation_date"):
+    def get_all_by_user(cls, user, order_by="-creation_date"):
         return cls.all().filter("user", user.key()).order(order_by)
 
     @classmethod
     def get_all(cls, order_by="-creation_date"):
         return cls.all().order(order_by)
+
+    @staticmethod
+    def update_post(post, title, content):
+        post.title = title
+        post.content = content
+        return post.put()

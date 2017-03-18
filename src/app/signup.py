@@ -33,7 +33,7 @@ class SignupPage(Handler):
                 self.response.headers.add_header("Set-Cookie",
                                                  create_cookie("uid",
                                                                user.id()))
-                self.redirect(self.uri_for("home"))
+                self.redirect_to("home")
         self.render_signup(form)
 
     def render_signup(self, form):

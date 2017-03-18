@@ -7,10 +7,10 @@ class PostsPage(Handler):
     def get(self):
         """ Get all user's posts and render them
         """
-        posts = Posts.get_by_user(self.user)
+        posts = Posts.get_all_by_user(self.user)
         self.render("posts/posts.html", posts=posts)
 
-class PostDetailsPage(Handler):
+class ViewPostPage(Handler):
     def get(self, post_id):
         """ Get post :param post_id: and render it
 
@@ -40,7 +40,7 @@ class AddPostPage(Handler):
             # Post creation
             if Posts.new_post(form.title.data, form.content.data,
                               self.user.key()):
-                self.redirect(self.uri_for("home"))
+                self.redirect_to("home")
         self.render_addpost(form)
 
     def render_addpost(self, form):
@@ -53,28 +53,44 @@ class AddPostPage(Handler):
 
 class EditPostPage(Handler):
     def get(self, post_id):
-        """Generate a form filled with post datas and render it
+        """ Display the form to edit a post
 
             :param post_id:
-                ID of the post
+                ID of the post to edit
         """
         post = Posts.get_by_id(int(post_id))
+
+        # If user is not the author of the post
+        #   We redirect to the home page
+        if not self.is_the_author(post):
+            self.redirect_to("home")
+
         form = PostForm(obj=post)
         self.render_editpost(form)
 
-    def post(self):
-        """If the form is valid, the post is created
-        and user is redirected to home page
+    def post(self, post_id):
+        """If the form is valid, the post is updated
+        and user is redirected to the post
+
+        If user is not authorized to edit the post,
+        he is redirected to homepage
 
         If an error occurred, form is displayed with
         details of error
         """
+        post = Posts.get_by_id(int(post_id))
+
+        # If user is not the author of the post
+        #   We redirect to the home page
+        if not self.is_the_author(post):
+            self.redirect_to("home")
+
         form = PostForm(self.request.POST)
 
         if form.validate():
-            # Post creation
-            print "validate"
-        self.render_addpost(form)
+            if Posts.update_post(post, form.title.data, form.content.data):
+                self.redirect_to("viewpost", post_id=post_id)
+        self.render_editpost(form)
 
     def render_editpost(self, form):
         """Include the form in a template and render it
@@ -83,3 +99,16 @@ class EditPostPage(Handler):
                 A :class:`Form` instance.
         """
         self.render("posts/edit_post.html", form=form)
+
+    def is_the_author(self, post):
+        """ Check if user is the author of the post
+
+            :param post:
+                Post entity to edit
+            :returns:
+                If user is the author, we return True
+                Otherwise, we return False
+        """
+        if post and post.user.key() == self.user.key():
+            return True
+        return False
