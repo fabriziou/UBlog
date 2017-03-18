@@ -23,7 +23,7 @@ class Comment(db.Model):
         return comment.put()
 
     @classmethod
-    def get_all_by_post(cls, post, order_by="-creation_date"):
+    def get_all_by_post(cls, post, order_by="creation_date"):
         """ Return all Comments that are not deleted from a given Post
 
             :param post:
@@ -36,7 +36,7 @@ class Comment(db.Model):
         comments = cls.all().ancestor(post)
         comments.filter("is_deleted", False)
         comments.order(order_by)
-        return comments.get()
+        return comments
 
     @staticmethod
     def update_comment(comment, content):

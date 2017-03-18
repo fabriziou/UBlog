@@ -1,0 +1,13 @@
+{% if comments %}
+  {% for comment in comments %}
+    {% if user %}
+      {% if comment.user.key() == user.key() %}
+        <h3><a href="/comments/edit/{{ post.key() }}">Edit</a></h3>
+      {% endif %}
+    {% endif %}
+    <span id="{{comment.key()}}">{{ comment.content }}</span>
+    <br>
+    Created by {{ comment.user.username }} on {{ comment.creation_date }}
+    <hr>
+  {% endfor %}
+{% endif %}

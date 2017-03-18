@@ -21,8 +21,9 @@ class AddPostPage(Handler):
 
         if form.validate():
             # Post creation
-            if Post.new_post(form.title.data, form.content.data, self.user):
-                self.redirect_to("home")
+            post_key = Post.new_post(form.title.data, form.content.data, self.user)
+            if post_key:
+                self.redirect_to("viewpost", post_key=post_key)
         self.render_addpost(form)
 
     def render_addpost(self, form):

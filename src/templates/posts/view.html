@@ -7,4 +7,6 @@ My posts
 {% block content %}
   <h1>Post {{ post.title }}</h1>
   {% include "commons/posts/view.html" %}
+  {% include "commons/comments/form.html" %}
+  {% include "commons/comments/list.html" %}
 {% endblock %}

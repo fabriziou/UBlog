@@ -15,6 +15,12 @@ indexes:
   properties:
   - name: is_deleted
   - name: creation_date
+
+- kind: Comment
+  ancestor: yes
+  properties:
+  - name: is_deleted
+  - name: creation_date
     direction: desc
 
 - kind: Post
