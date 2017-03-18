@@ -109,6 +109,7 @@ class EditPostPage(Handler):
                 If user is the author, we return True
                 Otherwise, we return False
         """
-        if post and post.user.key() == self.user.key():
+        if (post and not post.is_deleted
+                and post.user.key() == self.user.key()):
             return True
         return False

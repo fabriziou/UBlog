@@ -18,6 +18,13 @@ indexes:
 
 - kind: Posts
   properties:
+  - name: is_deleted
+  - name: user
+  - name: creation_date
+    direction: desc
+
+- kind: Posts
+  properties:
   - name: user
   - name: creation_date
     direction: desc
