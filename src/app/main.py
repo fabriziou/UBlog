@@ -4,5 +4,5 @@ from models.Posts import Posts
 
 class MainPage(Handler):
     def get(self):
-        posts = Posts.all().order("-creation_date")
+        posts = Posts.get_all()
         self.render("home/home.html", posts=posts)

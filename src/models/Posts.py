@@ -14,3 +14,11 @@ class Posts(db.Model):
     def new_post(cls, title, content, user):
         post = cls(title=title, content=content, user=user)
         return post.put()
+
+    @classmethod
+    def get_by_user(cls, user, order_by="-creation_date"):
+        return cls.all().filter("user", user.key()).order(order_by)
+
+    @classmethod
+    def get_all(cls, order_by="-creation_date"):
+        return cls.all().order(order_by)
