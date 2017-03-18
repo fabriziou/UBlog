@@ -1,7 +1,7 @@
 from framework.request_handler import Handler
 from wtforms.validators import ValidationError
 from forms.login import LoginForm
-from models.users import Users
+from models.user import User
 from framework.cookie_handler import create_cookie
 
 
@@ -47,13 +47,13 @@ class LoginPage(Handler):
                 If a user is found, we return his key
                 Otherwise, we return False
         """
-        user = Users.get_by_email(email)
+        user = User.get_by_email(email)
         if user:
             # Get salt from user.password
             salt = user.password[:88]
             # Hash password with the same salt than user
-            password_hashed = Users.crypt_password(password,
-                                                   salt)
+            password_hashed = User.crypt_password(password,
+                                                  salt)
             if password_hashed == user.password:
                 return user.key()
             else:

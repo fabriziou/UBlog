@@ -5,7 +5,7 @@ from os import urandom
 from framework.cookie_handler import read_cookie
 
 
-class Users(db.Model):
+class User(db.Model):
     username = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
     password = db.StringProperty(required=True)

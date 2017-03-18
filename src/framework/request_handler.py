@@ -1,7 +1,7 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 from webapp2 import RequestHandler
-from models.users import Users
+from models.user import User
 
 
 class Handler(RequestHandler):
@@ -17,7 +17,7 @@ class Handler(RequestHandler):
 
         self.errors = {}
         # Retrieve user by his cookie
-        self.user = Users.get_by_cookie(self.request.cookies.get("uid"))
+        self.user = User.get_by_cookie(self.request.cookies.get("uid"))
 
     def render(self, template, **kw):
         """Render the HTML page

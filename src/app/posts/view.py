@@ -1,5 +1,5 @@
 from framework.request_handler import Handler
-from models.posts import Posts
+from models.post import Post
 
 
 class ViewPostPage(Handler):
@@ -9,5 +9,5 @@ class ViewPostPage(Handler):
             :param post_key:
                 Key of the post
         """
-        post = Posts.get(post_key)
+        post = Post.get(post_key)
         self.render("posts/view.html", post=post)

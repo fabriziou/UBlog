@@ -1,6 +1,6 @@
 from framework.request_handler import Handler
 from forms.post import PostForm
-from models.posts import Posts
+from models.post import Post
 
 
 class AddPostPage(Handler):
@@ -21,7 +21,7 @@ class AddPostPage(Handler):
 
         if form.validate():
             # Post creation
-            if Posts.new_post(form.title.data, form.content.data, self.user):
+            if Post.new_post(form.title.data, form.content.data, self.user):
                 self.redirect_to("home")
         self.render_addpost(form)
 

@@ -1,8 +1,8 @@
 from framework.request_handler import Handler
-from models.posts import Posts
+from models.post import Post
 
 
 class HomePage(Handler):
     def get(self):
-        posts = Posts.get_all()
+        posts = Post.get_all()
         self.render("home/page.html", posts=posts)

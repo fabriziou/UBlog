@@ -3,6 +3,6 @@
     <br>
     {{ post.content }}
     <br>
-    Created by {{ post.key.username }} on {{ post.creation_date }}
+    Created by {{ post.parent().username }} on {{ post.creation_date }}
     <hr>
 {% endif %}

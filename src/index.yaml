@@ -10,6 +10,19 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Post
+  properties:
+  - name: is_deleted
+  - name: creation_date
+    direction: desc
+
+- kind: Post
+  ancestor: yes
+  properties:
+  - name: is_deleted
+  - name: creation_date
+    direction: desc
+
 - kind: Posts
   properties:
   - name: id

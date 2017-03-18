@@ -1,6 +1,6 @@
 from framework.request_handler import Handler
 from forms.post import PostForm
-from models.posts import Posts
+from models.post import Post
 
 
 class EditPostPage(Handler):
@@ -10,7 +10,7 @@ class EditPostPage(Handler):
             :param post_key:
                 Key of the post to edit
         """
-        post = Posts.get(post_key)
+        post = Post.get(post_key)
 
         # If user is not the author of the post
         #   We redirect to the home page
@@ -30,7 +30,7 @@ class EditPostPage(Handler):
         If an error occurred, form is displayed with
         details of error
         """
-        post = Posts.get(post_key)
+        post = Post.get(post_key)
 
         # If user is not the author of the post
         #   We redirect to the home page
@@ -40,7 +40,7 @@ class EditPostPage(Handler):
         form = PostForm(self.request.POST)
 
         if form.validate():
-            if Posts.update_post(post, form.title.data, form.content.data):
+            if Post.update_post(post, form.title.data, form.content.data):
                 self.redirect_to("viewpost", post_key=post_key)
         self.render_editpost(form)
 
