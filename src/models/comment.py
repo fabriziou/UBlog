@@ -1,67 +1,53 @@
 from google.appengine.ext import db
 
 
-class Posts(db.Model):
-    title = db.StringProperty(required=True)
+class Comment(db.Model):
+    user = db.ReferenceProperty(required=True)
     content = db.TextProperty(required=True)
     creation_date = db.DateTimeProperty(auto_now_add=True)
     last_modification = db.DateTimeProperty(auto_now=True)
     is_deleted = db.BooleanProperty(default=False)
 
     @classmethod
-    def new_post(cls, title, content, user):
+    def new_comment(cls, content, user, post):
         """ Create new entity in Datastore
 
-            :param title:
-                Post's title
             :param content:
-                Post's content
+                Comment's content
             :param user:
-                User entity, author of the post
+                User entity, author of the comment
+            :param post:
+                Post entity
         """
-        post = cls(parent=user, title=title, content=content, user=user)
-        return post.put()
+        comment = cls(parent=post, user=user, content=content)
+        return comment.put()
 
     @classmethod
-    def get_all_by_user(cls, user, order_by="-creation_date"):
-        """ Return all Posts that are not deleted from a given user
-
-            :param user:
-                Users entity
-            :param order_by:
-                Property to sort on
-            :returns:
-                List of Posts
-        """
-        posts = cls.all().ancestor(user)
-        posts.filter("is_deleted", False)
-        posts.order(order_by)
-        return posts
-
-    @classmethod
-    def get_all(cls, order_by="-creation_date"):
-        """ Return all Posts that are not deleted
-
-            :param order_by:
-                Property to sort on
-            :returns:
-                List of Posts
-        """
-        return cls.all().filter("is_deleted", False).order(order_by)
-
-    @staticmethod
-    def update_post(post, title, content):
-        """ Update the post
+    def get_all_by_post(cls, post, order_by="-creation_date"):
+        """ Return all Comments that are not deleted from a given Post
 
             :param post:
-                Instance of post
-            :param title:
-                Post's title
+                Post entity
+            :param order_by:
+                Property to sort on
+            :returns:
+                List of Comments
+        """
+        comments = cls.all().ancestor(post)
+        comments.filter("is_deleted", False)
+        comments.order(order_by)
+        return comments.get()
+
+    @staticmethod
+    def update_comment(comment, content):
+        """ Update the comment
+
+            :param comment:
+                Instance of comment
             :param content:
-                Post's content
+                Comment's content
             :returns:
                 The updated instance
         """
-        post.title = title
-        post.content = content
-        return post.put()
+        comment.content = content
+        return comment.put()
