@@ -1,5 +1,4 @@
 from google.appengine.ext import db
-from models.Users import Users
 
 
 class Posts(db.Model):

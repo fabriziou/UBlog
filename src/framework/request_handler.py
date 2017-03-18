@@ -1,7 +1,7 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 from webapp2 import RequestHandler
-from models.Users import Users
+from models.users import Users
 
 
 class Handler(RequestHandler):

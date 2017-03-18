@@ -1,7 +1,7 @@
 from framework.request_handler import Handler
 from wtforms.validators import ValidationError
 from forms.login import LoginForm
-from models.Users import Users
+from models.users import Users
 from framework.cookie_handler import create_cookie
 
 
@@ -26,7 +26,7 @@ class LoginPage(Handler):
         if form.validate():
             # Check in Datastore if user exists
             user_key = self.valid_login_credentials(form.email.data,
-                                                   form.password.data)
+                                                    form.password.data)
             if user_key:
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
@@ -68,4 +68,4 @@ class LoginPage(Handler):
             :param form:
                 A :class:`Form` instance.
         """
-        self.render("login/login.html", form=form)
+        self.render("login/page.html", form=form)

@@ -1,6 +1,6 @@
 from framework.request_handler import Handler
 from forms.post import PostForm
-from models.Posts import Posts
+from models.posts import Posts
 
 
 class PostsPage(Handler):
@@ -8,7 +8,8 @@ class PostsPage(Handler):
         """ Get all user's posts and render them
         """
         posts = Posts.get_all_by_user(self.user)
-        self.render("posts/posts.html", posts=posts)
+        self.render("posts/list.html", posts=posts)
+
 
 class ViewPostPage(Handler):
     def get(self, post_key):
@@ -18,7 +19,8 @@ class ViewPostPage(Handler):
                 Key of the post
         """
         post = Posts.get(post_key)
-        self.render("posts/post_details.html", post=post)
+        self.render("posts/view.html", post=post)
+
 
 class AddPostPage(Handler):
     def get(self):
@@ -48,7 +50,8 @@ class AddPostPage(Handler):
             :param form:
                 A :class:`Form` instance.
         """
-        self.render("posts/add_post.html", form=form)
+        self.render("posts/add.html", form=form)
+
 
 class EditPostPage(Handler):
     def get(self, post_key):
@@ -91,14 +94,6 @@ class EditPostPage(Handler):
                 self.redirect_to("viewpost", post_key=post_key)
         self.render_editpost(form)
 
-    def render_editpost(self, form):
-        """Include the form in a template and render it
-
-            :param form:
-                A :class:`Form` instance.
-        """
-        self.render("posts/edit_post.html", form=form)
-
     def is_the_author(self, post):
         """ Check if user is the author of the post
 
@@ -112,3 +107,11 @@ class EditPostPage(Handler):
                 and post.parent().key() == self.user.key()):
             return True
         return False
+
+    def render_editpost(self, form):
+        """Include the form in a template and render it
+
+            :param form:
+                A :class:`Form` instance.
+        """
+        self.render("posts/edit.html", form=form)

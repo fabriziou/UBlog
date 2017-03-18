@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-My posts
+Add new post
 {% endblock%}
 
 {% block content %}
-  <h1>Post {{ post.title }}</h1>
-  {% include "commons/post_details.html" %}
+  <h1>Add post</h1>
+  {% include "commons/posts/form.html" %}
 {% endblock %}

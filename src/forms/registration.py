@@ -1,6 +1,6 @@
 from wtforms import Form, StringField, PasswordField
 from wtforms.validators import InputRequired, Email, Length, EqualTo, Regexp
-from validators.Users import UsernameIsUnique, EmailIsUnique
+from validators.users import UsernameIsUnique, EmailIsUnique
 
 
 class RegistrationForm(Form):

@@ -1,5 +1,5 @@
 from wtforms.validators import ValidationError
-from models.Users import Users
+from models.users import Users
 
 
 class UsernameIsUnique(object):

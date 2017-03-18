@@ -1,7 +1,7 @@
 from framework.request_handler import Handler
 from framework.cookie_handler import create_cookie
 from forms.registration import RegistrationForm
-from models.Users import Users
+from models.users import Users
 
 
 class SignupPage(Handler):
@@ -27,7 +27,7 @@ class SignupPage(Handler):
 
         if form.validate():
             user_key = Users.new_user(form.email.data, form.username.data,
-                                  form.password.data)
+                                      form.password.data)
             if user_key:
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
@@ -42,4 +42,4 @@ class SignupPage(Handler):
             :param form:
                 A :class:`Form` instance.
         """
-        self.render("signup/signup.html", form=form)
+        self.render("signup/page.html", form=form)
