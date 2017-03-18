@@ -4,7 +4,7 @@ from forms.registration import RegistrationForm
 from models.users import Users
 
 
-class SignupPage(Handler):
+class RegistrationPage(Handler):
     @Handler.login_required(False)
     def get(self):
         """Generate an empty form and render it

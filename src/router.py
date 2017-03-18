@@ -3,16 +3,22 @@ from webapp2 import Route
 
 app = WSGIApplication([
     # Home
-    Route(r'/', handler='app.main.MainPage', name='home'),
+    Route(r'/',
+          handler='app.home.HomePage', name='home'),
+    Route(r'/register',
+          handler='app.registration.RegistrationPage', name='signup'),
+    Route(r'/login',
+          handler='app.login.LoginPage', name='login'),
+    Route(r'/logout',
+          handler='app.logout.LogoutPage', name='logout'),
 
-    # Logout pages
-    Route(r'/signup', handler='app.signup.SignupPage', name='signup'),
-    Route(r'/login', handler='app.login.LoginPage', name='login'),
-
-    # Login pages
-    Route(r'/logout', handler='app.logout.LogoutPage', name='logout'),
-    Route(r'/posts', handler='app.posts.PostsPage', name='userposts'),
-    Route(r'/posts/view/<post_key:[a-zA-Z0-9-_]+>', handler='app.posts.ViewPostPage', name='viewpost'),
-    Route(r'/posts/add', handler='app.posts.AddPostPage', name='addpost'),
-    Route(r'/posts/edit/<post_key:[a-zA-Z0-9-_]+>', handler='app.posts.EditPostPage', name='editpost')
+    # /posts
+    Route(r'/posts',
+          handler='app.posts.list.ListPostsPage', name='userposts'),
+    Route(r'/posts/view/<post_key:[a-zA-Z0-9-_]+>',
+          handler='app.posts.view.ViewPostPage', name='viewpost'),
+    Route(r'/posts/add',
+          handler='app.posts.add.AddPostPage', name='addpost'),
+    Route(r'/posts/edit/<post_key:[a-zA-Z0-9-_]+>',
+          handler='app.posts.edit.EditPostPage', name='editpost')
 ], debug=True)
