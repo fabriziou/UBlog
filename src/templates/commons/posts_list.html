@@ -1,15 +1,15 @@
 {% if posts %}
   {% for post in posts %}
     {% if user %}
-      {% if post.user.key() == user.key() %}
-        <h3><a href="/posts/edit/{{ post.key().id() }}">Edit</a></h3>
+      {% if post.parent().key() == user.key() %}
+        <h3><a href="/posts/edit/{{ post.key() }}">Edit</a></h3>
       {% endif %}
     {% endif %}
-    <a href="/posts/view/{{ post.key().id() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
+    <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
     <br>
     {{ post.content }}
     <br>
-    Created by {{ post.user.username }} on {{ post.creation_date }}
+    Created by {{ post.parent().username }} on {{ post.creation_date }}
     <hr>
   {% endfor %}
 {% endif %}

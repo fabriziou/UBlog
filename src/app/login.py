@@ -25,12 +25,13 @@ class LoginPage(Handler):
 
         if form.validate():
             # Check in Datastore if user exists
-            user_id = self.valid_login_credentials(form.email.data,
+            user_key = self.valid_login_credentials(form.email.data,
                                                    form.password.data)
-            if user_id:
+            if user_key:
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
-                                                 create_cookie("uid", user_id))
+                                                 create_cookie("uid",
+                                                               user_key))
                 self.redirect_to("home")
 
         self.render_login(form)
@@ -43,7 +44,7 @@ class LoginPage(Handler):
             :param password:
                 Password of the user
             :returns:
-                If a user is found, we return his ID
+                If a user is found, we return his key
                 Otherwise, we return False
         """
         user = Users.get_by_email(email)
@@ -54,7 +55,7 @@ class LoginPage(Handler):
             password_hashed = Users.crypt_password(password,
                                                    salt)
             if password_hashed == user.password:
-                return user.key().id()
+                return user.key()
             else:
                 self.errors["IncorrectPassword"] = "Password doesn't match"
         else:

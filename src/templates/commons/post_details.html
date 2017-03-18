@@ -1,8 +1,8 @@
 {% if post %}
-    <a href="/posts/view/{{ post.key().id() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
+    <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
     <br>
     {{ post.content }}
     <br>
-    Created by {{ post.user.username }} on {{ post.creation_date }}
+    Created by {{ post.key.username }} on {{ post.creation_date }}
     <hr>
 {% endif %}

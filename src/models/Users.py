@@ -24,7 +24,7 @@ class Users(db.Model):
             :param password:
                 User's password (not hashed)
             :returns:
-                If successful, an instance of Users is returned
+                If successful, the user key is returned
                 Otherwise, None is returned
         """
         # Format datas, crypt password
@@ -54,15 +54,16 @@ class Users(db.Model):
         """Retrieve user by his cookie
 
             :param cookie:
-                Cookie that contains the user id
+                Cookie that contains the user key
             :returns:
                 If successful, an instance of Users is returned
                 Otherwise, None is returned
         """
         if cookie:
-            uid = int(read_cookie(cookie))
-            if uid:
-                return cls.get_by_id(uid)
+            user_key = read_cookie(cookie)
+            if user_key:
+                print user_key
+                return cls.get(user_key)
         return None
 
     @staticmethod

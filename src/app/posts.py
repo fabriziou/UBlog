@@ -11,13 +11,13 @@ class PostsPage(Handler):
         self.render("posts/posts.html", posts=posts)
 
 class ViewPostPage(Handler):
-    def get(self, post_id):
-        """ Get post :param post_id: and render it
+    def get(self, post_key):
+        """ Get post :param post_key: and render it
 
-            :param post_id:
-                ID of the post
+            :param post_key:
+                Key of the post
         """
-        post = Posts.get_by_id(int(post_id))
+        post = Posts.get(post_key)
         self.render("posts/post_details.html", post=post)
 
 class AddPostPage(Handler):
@@ -38,8 +38,7 @@ class AddPostPage(Handler):
 
         if form.validate():
             # Post creation
-            if Posts.new_post(form.title.data, form.content.data,
-                              self.user.key()):
+            if Posts.new_post(form.title.data, form.content.data, self.user):
                 self.redirect_to("home")
         self.render_addpost(form)
 
@@ -52,13 +51,13 @@ class AddPostPage(Handler):
         self.render("posts/add_post.html", form=form)
 
 class EditPostPage(Handler):
-    def get(self, post_id):
+    def get(self, post_key):
         """ Display the form to edit a post
 
-            :param post_id:
-                ID of the post to edit
+            :param post_key:
+                Key of the post to edit
         """
-        post = Posts.get_by_id(int(post_id))
+        post = Posts.get(post_key)
 
         # If user is not the author of the post
         #   We redirect to the home page
@@ -68,7 +67,7 @@ class EditPostPage(Handler):
         form = PostForm(obj=post)
         self.render_editpost(form)
 
-    def post(self, post_id):
+    def post(self, post_key):
         """If the form is valid, the post is updated
         and user is redirected to the post
 
@@ -78,7 +77,7 @@ class EditPostPage(Handler):
         If an error occurred, form is displayed with
         details of error
         """
-        post = Posts.get_by_id(int(post_id))
+        post = Posts.get(post_key)
 
         # If user is not the author of the post
         #   We redirect to the home page
@@ -89,7 +88,7 @@ class EditPostPage(Handler):
 
         if form.validate():
             if Posts.update_post(post, form.title.data, form.content.data):
-                self.redirect_to("viewpost", post_id=post_id)
+                self.redirect_to("viewpost", post_key=post_key)
         self.render_editpost(form)
 
     def render_editpost(self, form):
@@ -110,6 +109,6 @@ class EditPostPage(Handler):
                 Otherwise, we return False
         """
         if (post and not post.is_deleted
-                and post.user.key() == self.user.key()):
+                and post.parent().key() == self.user.key()):
             return True
         return False

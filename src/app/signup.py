@@ -26,13 +26,13 @@ class SignupPage(Handler):
         form = RegistrationForm(self.request.POST)
 
         if form.validate():
-            user = Users.new_user(form.email.data, form.username.data,
+            user_key = Users.new_user(form.email.data, form.username.data,
                                   form.password.data)
-            if user:
+            if user_key:
                 # Cookie creation and redirection
                 self.response.headers.add_header("Set-Cookie",
                                                  create_cookie("uid",
-                                                               user.id()))
+                                                               user_key))
                 self.redirect_to("home")
         self.render_signup(form)
 

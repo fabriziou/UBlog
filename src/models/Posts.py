@@ -5,7 +5,6 @@ from models.Users import Users
 class Posts(db.Model):
     title = db.StringProperty(required=True)
     content = db.TextProperty(required=True)
-    user = db.ReferenceProperty(Users)
     creation_date = db.DateTimeProperty(auto_now_add=True)
     last_modification = db.DateTimeProperty(auto_now=True)
     is_deleted = db.BooleanProperty(default=False)
@@ -21,7 +20,7 @@ class Posts(db.Model):
             :param user:
                 User entity, author of the post
         """
-        post = cls(title=title, content=content, user=user)
+        post = cls(parent=user, title=title, content=content, user=user)
         return post.put()
 
     @classmethod
@@ -35,8 +34,8 @@ class Posts(db.Model):
             :returns:
                 List of Posts
         """
-        posts = cls.all()
-        posts.filter("user", user.key()).filter("is_deleted", False)
+        posts = cls.all().ancestor(user)
+        posts.filter("is_deleted", False)
         posts.order(order_by)
         return posts
 

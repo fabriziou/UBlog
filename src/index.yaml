@@ -19,6 +19,12 @@ indexes:
 - kind: Posts
   properties:
   - name: is_deleted
+  - name: creation_date
+    direction: desc
+
+- kind: Posts
+  properties:
+  - name: is_deleted
   - name: user
   - name: creation_date
     direction: desc
@@ -26,5 +32,12 @@ indexes:
 - kind: Posts
   properties:
   - name: user
+  - name: creation_date
+    direction: desc
+
+- kind: Posts
+  ancestor: yes
+  properties:
+  - name: is_deleted
   - name: creation_date
     direction: desc
