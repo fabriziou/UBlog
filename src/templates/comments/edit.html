@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit comment
+{% endblock%}
+
+{% block content %}
+  <h1>Post {{ post.title }}</h1>
+  {% include "commons/posts/view.html" %}
+  {% include "commons/comments/list.html" %}
+  {% include "commons/comments/form.html" %}
+{% endblock %}

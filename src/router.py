@@ -20,5 +20,9 @@ app = WSGIApplication([
     Route(r'/posts/add',
           handler='app.posts.add.AddPostPage', name='addpost'),
     Route(r'/posts/edit/<post_key:[a-zA-Z0-9-_]+>',
-          handler='app.posts.edit.EditPostPage', name='editpost')
+          handler='app.posts.edit.EditPostPage', name='editpost'),
+
+    # /comments
+    Route(r'/posts/<post_key:[a-zA-Z0-9-_]+>/comments/edit/<comment_key:[a-zA-Z0-9-_]+>',
+          handler='app.comments.edit.EditCommentPage', name='editcomment')
 ], debug=True)

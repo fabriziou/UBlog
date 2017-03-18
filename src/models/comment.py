@@ -23,18 +23,22 @@ class Comment(db.Model):
         return comment.put()
 
     @classmethod
-    def get_all_by_post(cls, post, order_by="creation_date"):
+    def get_all_by_post(cls, post, order_by="creation_date", before_date=None):
         """ Return all Comments that are not deleted from a given Post
 
             :param post:
                 Post entity
             :param order_by:
                 Property to sort on
+            :param before_date:
+                Get comments created prior to that date
             :returns:
                 List of Comments
         """
         comments = cls.all().ancestor(post)
         comments.filter("is_deleted", False)
+        if before_date:
+            comments.filter("creation_date <", before_date)
         comments.order(order_by)
         return comments
 

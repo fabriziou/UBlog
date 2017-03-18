@@ -2,7 +2,7 @@
   {% for comment in comments %}
     {% if user %}
       {% if comment.user.key() == user.key() %}
-        <h3><a href="/comments/edit/{{ post.key() }}">Edit</a></h3>
+        <h3><a href="/posts/{{ post.key() }}/comments/edit/{{ comment.key() }}">Edit</a></h3>
       {% endif %}
     {% endif %}
     <span id="{{comment.key()}}">{{ comment.content }}</span>
