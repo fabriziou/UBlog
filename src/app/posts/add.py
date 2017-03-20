@@ -5,6 +5,7 @@ from models.post import Post
 
 
 class AddPost(PostPage):
+
     @Handler.login_required(True)
     def get(self):
         """ Display the form to add a post

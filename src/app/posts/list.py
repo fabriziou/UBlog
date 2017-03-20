@@ -4,6 +4,7 @@ from models.post import Post
 
 
 class ListPosts(PostPage):
+    
     @Handler.login_required(True)
     def get(self):
         """ List all user's posts

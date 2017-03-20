@@ -2,7 +2,8 @@
   {% for post in posts %}
     {% if user %}
       {% if post.parent().key() == user.key() %}
-        <h3><a href="/posts/edit/{{ post.key() }}">Edit</a></h3>
+        <h4><a href="/posts/edit/{{ post.key() }}">Edit</a></h4>
+        <h4><a href="/posts/delete/{{ post.key() }}">Delete</a></h4>
       {% endif %}
     {% endif %}
     <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>

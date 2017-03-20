@@ -72,3 +72,16 @@ class Post(db.Model):
         post.content = content
 
         return post.put()
+
+    @staticmethod
+    def delete_post(post):
+        """ Set the post to be deleted
+
+            :param post:
+                Instance of post
+            :returns:
+                The updated instance
+        """
+        post.is_deleted = True
+
+        return post.put()

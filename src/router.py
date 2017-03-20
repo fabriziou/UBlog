@@ -21,8 +21,10 @@ app = WSGIApplication([
           handler='app.posts.add.AddPost', name='addpost'),
     Route(r'/posts/edit/<post_key:[a-zA-Z0-9-_]+>',
           handler='app.posts.edit.EditPost', name='editpost'),
-  Route(r'/posts/like/<post_key:[a-zA-Z0-9-_]+>',
-        handler='app.posts.like.LikePost', name='likepost'),
+    Route(r'/posts/delete/<post_key:[a-zA-Z0-9-_]+>',
+          handler='app.posts.delete.DeletePost', name='deletepost'),
+    Route(r'/posts/like/<post_key:[a-zA-Z0-9-_]+>',
+          handler='app.posts.like.LikePost', name='likepost'),
 
     # /comments
     Route(r'/posts/<post_key:[a-zA-Z0-9-_]+>/comments/edit/<comment_key:[a-zA-Z0-9-_]+>',

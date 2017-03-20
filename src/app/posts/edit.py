@@ -5,8 +5,10 @@ from models.post import Post
 
 
 class EditPost(PostPage):
+
     @Handler.login_required(True)
-    @PostPage.is_edit_authorized
+    @PostPage.is_post_valid
+    @PostPage.is_author
     def get(self, post_key):
         """ Display the form to edit a post
 
@@ -18,7 +20,8 @@ class EditPost(PostPage):
         self.render_editpost(form)
 
     @Handler.login_required(True)
-    @PostPage.is_edit_authorized
+    @PostPage.is_post_valid
+    @PostPage.is_author
     def post(self, post_key):
         """ Update post and redirect user to the post page
 

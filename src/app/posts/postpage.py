@@ -25,6 +25,7 @@ class PostPage(Handler):
 
             # Check Post
             if (not self.post or self.post.is_deleted):
+                self.errors.append("Post unknown")
                 self.abort(404)
 
             self.comments = Comment.get_all_by_post(self.post)
@@ -34,25 +35,16 @@ class PostPage(Handler):
         return is_valid
 
     @staticmethod
-    def is_edit_authorized(func):
-        """ Check if user is authorized to edit this post
+    def is_author(func):
+        """ Check if user is authorized to update this post
 
         An error is thrown if :
-            * Post is unknown
-            * Post is deleted
             * User is not the author of the post
         """
         def is_valid(self, post_key):
-            self.post = Post.get(post_key)
-
-            # Check post
-            if (not self.post or self.post.is_deleted):
-                self.errors.append("Post unknown")
-                self.abort(404)
-
             # Check author
             if (not self.user or self.post.parent().key() != self.user.key()):
-                self.errors.append("You are not authorized to edit this post")
+                self.errors.append("You are not authorized to update this post")
                 self.abort(404)
 
             return func(self, post_key)

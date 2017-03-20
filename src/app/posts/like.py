@@ -9,7 +9,9 @@ class LikePost(PostPage):
     @Handler.login_required(True)
     @PostPage.is_post_valid
     def get(self, post_key):
-        """ Like a post
+        """ Like/Unlike a post
+
+            An error is thrown if user likes his own post
         """
         if self.post.parent().key() != self.user.key():
             like_key = Like.is_liked_by_user(self.user, self.post)
