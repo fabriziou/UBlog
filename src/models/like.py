@@ -15,19 +15,38 @@ class Like(db.Model):
                 User entity
             :param post:
                 Post entity
+            :returns:
+                Like entity
         """
         like = cls(parent=post, user=user)
 
         return like.put()
 
     @staticmethod
-    def delete_like(like_key):
-        like_key.is_deleted = True
-        return like_key.put()
+    def delete_like(like):
+        """ Set a Like entity as deleted
+
+            :param like:
+                Like entity
+            :returns:
+                The updated entity
+        """
+        like.is_deleted = True
+
+        return like.put()
 
     @classmethod
-    def get_like_by_user(cls, user, post):
-        """ Get like by user
+    def is_liked_by_user(cls, user, post):
+        """ Let you know if a post is liked by a given user
+
+            :param user:
+                User entity
+            :param post:
+                Post entity
+            :returns:
+                If user likes the post, an instance of Like is returned
+                Otherwise, None is returned
+
         """
         like = cls.all().ancestor(post)
 
@@ -35,3 +54,16 @@ class Like(db.Model):
         like.filter("user", user)
 
         return like.get()
+
+    @classmethod
+    def get_nb_like(cls, post):
+        """ Get number of likes of a post
+
+            :param post:
+                Post entity
+            :returns:
+                Number of likes of a given post
+        """
+        likes = cls.all().ancestor(post).filter("is_deleted", False)
+
+        return likes.count()

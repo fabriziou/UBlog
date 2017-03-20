@@ -11,8 +11,8 @@ class LikePost(PostPage):
     def get(self, post_key):
         """ Like a post
         """
-        if self.post.parent().key is not self.user.key():
-            like_key = Like.get_like_by_user(self.user, self.post)
+        if self.post.parent().key() != self.user.key():
+            like_key = Like.is_liked_by_user(self.user, self.post)
 
             if not like_key:
                 success = Like.new_like(self.user, self.post)
@@ -22,7 +22,8 @@ class LikePost(PostPage):
             if success:
                 self.redirect_to("viewpost", post_key=post_key)
             else:
-                abort(404)
+                self.abort(404)
 
         else:
-            abort(404, "You can't like your own post")
+            self.errors.append("You can't like your own post")
+            self.abort(404)

@@ -18,6 +18,8 @@ class Post(db.Model):
                 Post's content
             :param user:
                 User entity, author of the post
+            :returns:
+                Post entity
         """
         post = cls(parent=user, title=title, content=content, user=user)
 

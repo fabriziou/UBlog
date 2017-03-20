@@ -78,7 +78,7 @@ class User(db.Model):
             :param salt:
                 String of chars
             :returns:
-                Return the hashed password
+                Hashed password
         """
         if not salt:
             random_bytes = urandom(64)

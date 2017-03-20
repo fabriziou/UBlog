@@ -19,6 +19,17 @@ class Handler(RequestHandler):
         # Retrieve user by his cookie
         self.user = User.get_by_cookie(self.request.cookies.get("uid"))
 
+    def handle_exception(self, exception, debug):
+        """ Exception handler,
+
+            If an exception is catch, an error page is displayed
+        """
+        if isinstance(exception, HTTPException):
+            self.response.set_status(exception.code)
+        else:
+            self.response.set_status(500)
+        self.render("exception/error.html", exception=exception, debug=debug)
+
     def render(self, template, **kw):
         """Render the HTML page
 
@@ -29,13 +40,6 @@ class Handler(RequestHandler):
         html_from_template = jinja_template.render(kw, errors=self.errors,
                                                    user=self.user)
         self.response.out.write(html_from_template)
-
-    # def handle_exception(self, exception, debug):
-    #     if isinstance(exception, HTTPException):
-    #         self.response.set_status(exception.code)
-    #     else:
-    #         self.response.set_status(500)
-    #     self.render("exception/error.html", exception=exception, debug=debug)
 
     @staticmethod
     def login_required(is_required, *ag, **kw):
