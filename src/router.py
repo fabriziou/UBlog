@@ -28,5 +28,7 @@ app = WSGIApplication([
 
     # /comments
     Route(r'/posts/<post_key:[a-zA-Z0-9-_]+>/comments/edit/<comment_key:[a-zA-Z0-9-_]+>',
-          handler='app.comments.edit.EditCommentPage', name='editcomment')
+          handler='app.comments.edit.EditComment', name='editcomment'),
+    Route(r'/posts/<post_key:[a-zA-Z0-9-_]+>/comments/delete/<comment_key:[a-zA-Z0-9-_]+>',
+          handler='app.comments.delete.DeleteComment', name='deletecomment')
 ], debug=True)

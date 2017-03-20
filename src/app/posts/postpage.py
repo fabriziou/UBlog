@@ -44,7 +44,7 @@ class PostPage(Handler):
         def is_valid(self, post_key):
             # Check author
             if (not self.user or self.post.parent().key() != self.user.key()):
-                self.errors.append("You are not authorized to update this post")
+                self.errors.append("You are not allowed to update this post")
                 self.abort(404)
 
             return func(self, post_key)

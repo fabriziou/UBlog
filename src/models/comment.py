@@ -57,4 +57,18 @@ class Comment(db.Model):
                 The updated instance
         """
         comment.content = content
+
+        return comment.put()
+
+    @staticmethod
+    def delete_comment(comment):
+        """ Delete comment
+
+            :param comment:
+                Instance of comment
+            :returns:
+                The updated instance
+        """
+        comment.is_deleted = True
+
         return comment.put()
