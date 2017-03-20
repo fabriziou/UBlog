@@ -16,13 +16,6 @@ indexes:
   - name: is_deleted
   - name: creation_date
 
-- kind: Comment
-  ancestor: yes
-  properties:
-  - name: is_deleted
-  - name: creation_date
-    direction: desc
-
 - kind: Post
   properties:
   - name: is_deleted
@@ -30,38 +23,6 @@ indexes:
     direction: desc
 
 - kind: Post
-  ancestor: yes
-  properties:
-  - name: is_deleted
-  - name: creation_date
-    direction: desc
-
-- kind: Posts
-  properties:
-  - name: id
-  - name: creation_date
-    direction: desc
-
-- kind: Posts
-  properties:
-  - name: is_deleted
-  - name: creation_date
-    direction: desc
-
-- kind: Posts
-  properties:
-  - name: is_deleted
-  - name: user
-  - name: creation_date
-    direction: desc
-
-- kind: Posts
-  properties:
-  - name: user
-  - name: creation_date
-    direction: desc
-
-- kind: Posts
   ancestor: yes
   properties:
   - name: is_deleted

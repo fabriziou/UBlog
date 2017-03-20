@@ -7,7 +7,7 @@ class DeletePost(PostPage):
 
     @Handler.login_required(True)
     @PostPage.is_post_valid
-    @PostPage.is_author
+    @PostPage.is_post_author
     def get(self, post_key):
         """ List all user's posts
         """
