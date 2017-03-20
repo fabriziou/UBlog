@@ -3,8 +3,10 @@ from models.post import Post
 
 
 class ListPostsPage(Handler):
+    @Handler.login_required(True)
     def get(self):
-        """ Get all user's posts and render them
+        """ List all user's posts
         """
         posts = Post.get_all_by_user(self.user)
+        
         self.render("posts/list.html", posts=posts)

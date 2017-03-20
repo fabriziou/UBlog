@@ -14,8 +14,7 @@ class User(db.Model):
 
     @classmethod
     def new_user(cls, email, username, password):
-        """ Create a new user in Datastore
-            Datas are formated before insertion.
+        """ Create a new user
 
             :param email:
                 User's email
@@ -35,11 +34,12 @@ class User(db.Model):
         user = cls(username=username,
                    email=email,
                    password=password)
+
         return user.put()
 
     @classmethod
     def get_by_email(cls, email):
-        """Retrieve user by its email
+        """ Get user by its email
 
             :param email:
                 Email of the user
@@ -51,7 +51,7 @@ class User(db.Model):
 
     @classmethod
     def get_by_cookie(cls, cookie):
-        """Retrieve user by his cookie
+        """ Get user by his cookie
 
             :param cookie:
                 Cookie that contains the user key
@@ -61,13 +61,17 @@ class User(db.Model):
         """
         if cookie:
             user_key = read_cookie(cookie)
+
             if user_key:
                 return cls.get(user_key)
+
         return None
 
     @staticmethod
     def crypt_password(password, salt=None):
-        """Crypt password with salt
+        """ Crypt password with salt
+
+            A salt is generated if not given
 
             :param password:
                 Password to crypt
@@ -79,5 +83,7 @@ class User(db.Model):
         if not salt:
             random_bytes = urandom(64)
             salt = b64encode(random_bytes).decode('utf-8')
+
         hashed_password = salt + sha256(salt + password).hexdigest()
+
         return hashed_password

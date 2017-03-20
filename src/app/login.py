@@ -8,64 +8,63 @@ from framework.cookie_handler import create_cookie
 class LoginPage(Handler):
     @Handler.login_required(False)
     def get(self):
-        """Generate an empty form and render it
+        """ Display the form to login
         """
         form = LoginForm()
         self.render_login(form)
 
     @Handler.login_required(False)
     def post(self):
-        """If the form is valid, the user is logged
+        """ Connect user and redirect user to home page
 
-        If an error occurred, login form is displayed with
-        details of error
+        If credentials are valid,
+            a cookie is created to keep the user logged
+
+        If error,
+            display form with errors details
         """
-        # Populate the form with user inputs
         form = LoginForm(self.request.POST)
 
         if form.validate():
-            # Check in Datastore if user exists
             user_key = self.valid_login_credentials(form.email.data,
                                                     form.password.data)
+
             if user_key:
-                # Cookie creation and redirection
-                self.response.headers.add_header("Set-Cookie",
-                                                 create_cookie("uid",
-                                                               user_key))
+                # Create an auth cookie
+                cookie = create_cookie("uid", user_key)
+                self.response.headers.add_header("Set-Cookie", cookie)
                 self.redirect_to("home")
 
         self.render_login(form)
 
     def valid_login_credentials(self, email, password):
-        """Check if (username, password) match with a User in the Datastore
+        """Validate if email and password belongs to an account
 
             :param email:
                 Email of the user
             :param password:
                 Password of the user
             :returns:
-                If a user is found, we return his key
+                If credentials are valid, the user key is returned
                 Otherwise, we return False
         """
         user = User.get_by_email(email)
+
         if user:
-            # Get salt from user.password
             salt = user.password[:88]
-            # Hash password with the same salt than user
-            password_hashed = User.crypt_password(password,
-                                                  salt)
+            password_hashed = User.crypt_password(password, salt)
+
             if password_hashed == user.password:
                 return user.key()
             else:
-                self.errors["IncorrectPassword"] = "Password doesn't match"
+                self.errors.append("Password doesn't match")
         else:
-            self.errors["EmailNotFound"] = "No user found with this email"
+            self.errors.append("No user found with this email")
+
         return False
 
     def render_login(self, form):
-        """Include the form in a template and render it
-
-            :param form:
-                A :class:`Form` instance.
+        """ Include all datas in a template
+            and render the page
         """
         self.render("login/page.html", form=form)

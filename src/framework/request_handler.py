@@ -1,6 +1,6 @@
 import os
 from jinja2 import Environment, FileSystemLoader
-from webapp2 import RequestHandler
+from webapp2 import RequestHandler, HTTPException
 from models.user import User
 
 
@@ -15,7 +15,7 @@ class Handler(RequestHandler):
     def __init__(self, request=None, response=None):
         RequestHandler.__init__(self, request, response)
 
-        self.errors = {}
+        self.errors = []
         # Retrieve user by his cookie
         self.user = User.get_by_cookie(self.request.cookies.get("uid"))
 
@@ -30,8 +30,16 @@ class Handler(RequestHandler):
                                                    user=self.user)
         self.response.out.write(html_from_template)
 
+    def handle_exception(self, exception, debug):
+        if isinstance(exception, HTTPException):
+            self.response.set_status(exception.code)
+        else:
+            self.response.set_status(500)
+        self.render("exception/error.html", exception=exception, debug=debug)
+
+
     @staticmethod
-    def login_required(is_required=True):
+    def login_required(is_required, *ag, **kw):
         """ If login is required and user isn't connected:
                 User is redirect to login page
             If login isn't required and user is connected:
@@ -39,16 +47,16 @@ class Handler(RequestHandler):
             Otherwise, process continue
         """
         def func_login_required(func):
-            def check_requirements(self):
+            def check_requirements(self, *ag, **kw):
                 # If user IS authenticated and login IS NOT required
                 #   User is redirected to HOME page
                 if self.user and not is_required:
-                    self.redirect(self.uri_for("home"))
+                    return self.redirect_to("home")
                 # If user IS NOT authenticated and login IS required
                 #   User is redirected to LOGIN page
                 elif not self.user and is_required:
-                    self.redirect(self.uri_for("login"))
+                    return self.redirect_to("login")
                 # Requirements are met, process can go on
-                return func(self)
+                return func(self, *ag, **kw)
             return check_requirements
         return func_login_required

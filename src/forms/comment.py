@@ -3,4 +3,6 @@ from wtforms.validators import InputRequired, Length
 
 
 class CommentForm(Form):
-    content = TextAreaField('Comment', [InputRequired(), Length(min=5)])
+    content = TextAreaField("Comment",
+                            [InputRequired(),
+                             Length(min=5)])

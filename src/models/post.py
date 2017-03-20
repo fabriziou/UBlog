@@ -10,7 +10,7 @@ class Post(db.Model):
 
     @classmethod
     def new_post(cls, title, content, user):
-        """ Create new entity in Datastore
+        """ Create new post
 
             :param title:
                 Post's title
@@ -20,11 +20,12 @@ class Post(db.Model):
                 User entity, author of the post
         """
         post = cls(parent=user, title=title, content=content, user=user)
+
         return post.put()
 
     @classmethod
     def get_all_by_user(cls, user, order_by="-creation_date"):
-        """ Return all posts that are not deleted from a given user
+        """ Return all posts from a given user that are not deleted
 
             :param user:
                 Users entity
@@ -34,13 +35,16 @@ class Post(db.Model):
                 List of Posts
         """
         posts = cls.all().ancestor(user)
+
         posts.filter("is_deleted", False)
+
         posts.order(order_by)
+
         return posts
 
     @classmethod
     def get_all(cls, order_by="-creation_date"):
-        """ Return all Posts that are not deleted
+        """ Return all posts that are not deleted
 
             :param order_by:
                 Property to sort on
@@ -51,7 +55,7 @@ class Post(db.Model):
 
     @staticmethod
     def update_post(post, title, content):
-        """ Update the post
+        """ Update post
 
             :param post:
                 Instance of post
@@ -64,4 +68,5 @@ class Post(db.Model):
         """
         post.title = title
         post.content = content
+
         return post.put()

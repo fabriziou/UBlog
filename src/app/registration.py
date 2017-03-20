@@ -7,39 +7,32 @@ from models.user import User
 class RegistrationPage(Handler):
     @Handler.login_required(False)
     def get(self):
-        """Generate an empty form and render it
+        """ Display the form to register
         """
         form = RegistrationForm()
         self.render_signup(form)
 
     @Handler.login_required(False)
     def post(self):
-        """Validate the form
+        """ Create new user and redirect user to home page
 
-        If the form is valid, a new user is created
-        and redirected to the main page.
-
-        If an error occurred, the form is displayed with
-        details of error
+        If error,
+            display form with errors details
         """
-        # Populate the form with user inputs
         form = RegistrationForm(self.request.POST)
 
         if form.validate():
             user_key = User.new_user(form.email.data, form.username.data,
                                      form.password.data)
             if user_key:
-                # Cookie creation and redirection
-                self.response.headers.add_header("Set-Cookie",
-                                                 create_cookie("uid",
-                                                               user_key))
+                cookie = create_cookie("uid", user_key)
+                self.response.headers.add_header("Set-Cookie", cookie)
                 self.redirect_to("home")
+                
         self.render_signup(form)
 
     def render_signup(self, form):
-        """Include the form in a template and render it
-
-            :param form:
-                A :class:`Form` instance.
+        """ Include all datas in a template
+            and render the page
         """
         self.render("signup/page.html", form=form)

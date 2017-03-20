@@ -4,64 +4,64 @@ from models.post import Post
 
 
 class EditPostPage(Handler):
+    post = None
+
+    def is_edit_authorized(func):
+        """ Check if user is authorized to edit this post
+
+        An error is thrown if :
+            * Post is unknown
+            * Post is deleted
+            * User is not the author of the post
+        """
+        def is_valid(self, post_key):
+            self.post = Post.get(post_key)
+
+            # Check post
+            if (not self.post or self.post.is_deleted):
+                self.errors.append("Post unknown")
+                self.abort(404)
+
+            # Check author
+            if (not self.user or self.post.parent().key() != self.user.key()):
+                self.errors.append("You are not authorized to edit this post")
+                self.abort(404)
+
+            return func(self, post_key)
+        return is_valid
+
+    @Handler.login_required(True)
+    @is_edit_authorized
     def get(self, post_key):
         """ Display the form to edit a post
 
             :param post_key:
                 Key of the post to edit
         """
-        post = Post.get(post_key)
+        form = PostForm(obj=self.post)
 
-        # If user is not the author of the post
-        #   We redirect to the home page
-        if not self.is_the_author(post):
-            self.redirect_to("home")
-
-        form = PostForm(obj=post)
         self.render_editpost(form)
 
+    @Handler.login_required(True)
+    @is_edit_authorized
     def post(self, post_key):
-        """If the form is valid, the post is updated
-        and user is redirected to the post
+        """ Update post and redirect user to the post page
 
-        If user is not authorized to edit the post,
-        he is redirected to homepage
+        If error, display form with errors details
 
-        If an error occurred, form is displayed with
-        details of error
+            :param post_key:
+                Key of the post to edit
         """
-        post = Post.get(post_key)
-
-        # If user is not the author of the post
-        #   We redirect to the home page
-        if not self.is_the_author(post):
-            self.redirect_to("home")
-
         form = PostForm(self.request.POST)
 
         if form.validate():
-            if Post.update_post(post, form.title.data, form.content.data):
+            if Post.update_post(self.post, form.title.data, form.content.data):
                 self.redirect_to("viewpost", post_key=post_key)
+
         self.render_editpost(form)
 
-    def is_the_author(self, post):
-        """ Check if user is the author of the post
-
-            :param post:
-                Post entity to edit
-            :returns:
-                If user is the author, we return True
-                Otherwise, we return False
-        """
-        if (post and not post.is_deleted
-                and post.parent().key() == self.user.key()):
-            return True
-        return False
-
     def render_editpost(self, form):
-        """Include the form in a template and render it
-
-            :param form:
-                A :class:`Form` instance.
+        """ Include all datas in a template
+            and render the page
         """
         self.render("posts/edit.html", form=form)

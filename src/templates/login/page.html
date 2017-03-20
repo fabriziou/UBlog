@@ -8,8 +8,8 @@ Log in
   <h1>Log in</h1>
 
   {% if errors %}
-    {% for key, value in errors.items() %}
-        {{ value }}
+    {% for error in errors %}
+        {{ error }}
     {% endfor %}
   {% endif %}
   <form method="post">
