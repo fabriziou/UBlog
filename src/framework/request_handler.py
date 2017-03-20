@@ -30,13 +30,12 @@ class Handler(RequestHandler):
                                                    user=self.user)
         self.response.out.write(html_from_template)
 
-    def handle_exception(self, exception, debug):
-        if isinstance(exception, HTTPException):
-            self.response.set_status(exception.code)
-        else:
-            self.response.set_status(500)
-        self.render("exception/error.html", exception=exception, debug=debug)
-
+    # def handle_exception(self, exception, debug):
+    #     if isinstance(exception, HTTPException):
+    #         self.response.set_status(exception.code)
+    #     else:
+    #         self.response.set_status(500)
+    #     self.render("exception/error.html", exception=exception, debug=debug)
 
     @staticmethod
     def login_required(is_required, *ag, **kw):

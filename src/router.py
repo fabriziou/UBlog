@@ -14,13 +14,15 @@ app = WSGIApplication([
 
     # /posts
     Route(r'/posts',
-          handler='app.posts.list.ListPostsPage', name='userposts'),
+          handler='app.posts.list.ListPosts', name='userposts'),
     Route(r'/posts/view/<post_key:[a-zA-Z0-9-_]+>',
-          handler='app.posts.view.ViewPostPage', name='viewpost'),
+          handler='app.posts.view.ViewPost', name='viewpost'),
     Route(r'/posts/add',
-          handler='app.posts.add.AddPostPage', name='addpost'),
+          handler='app.posts.add.AddPost', name='addpost'),
     Route(r'/posts/edit/<post_key:[a-zA-Z0-9-_]+>',
-          handler='app.posts.edit.EditPostPage', name='editpost'),
+          handler='app.posts.edit.EditPost', name='editpost'),
+  Route(r'/posts/like/<post_key:[a-zA-Z0-9-_]+>',
+        handler='app.posts.like.LikePost', name='likepost'),
 
     # /comments
     Route(r'/posts/<post_key:[a-zA-Z0-9-_]+>/comments/edit/<comment_key:[a-zA-Z0-9-_]+>',

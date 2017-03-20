@@ -1,9 +1,10 @@
 from framework.request_handler import Handler
+from app.posts.postpage import PostPage
 from forms.post import PostForm
 from models.post import Post
 
 
-class AddPostPage(Handler):
+class AddPost(PostPage):
     @Handler.login_required(True)
     def get(self):
         """ Display the form to add a post
@@ -28,9 +29,3 @@ class AddPostPage(Handler):
                 self.redirect_to("viewpost", post_key=post_key)
 
         self.render_addpost(form)
-
-    def render_addpost(self, form):
-        """ Include all datas in a template
-            and render the page
-        """
-        self.render("posts/add.html", form=form)

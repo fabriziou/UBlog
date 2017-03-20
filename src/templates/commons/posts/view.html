@@ -4,5 +4,7 @@
     {{ post.content }}
     <br>
     Created by {{ post.parent().username }} on {{ post.creation_date }}
+    <br>
+    <h2><a href="/posts/like/{{post.key()}}">Like</a></h2>
     <hr>
 {% endif %}
