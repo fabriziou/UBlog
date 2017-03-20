@@ -1,12 +1,14 @@
 from framework.request_handler import Handler
-from app.comments.commentpage import CommentPage
+from app.posts.postpage import PostPage
+from models.comment import Comment
 from forms.comment import CommentForm
 
 
-class EditComment(CommentPage):
+class EditComment(PostPage):
 
     @Handler.login_required(True)
-    @CommentPage.is_edit_authorized
+    @PostPage.is_post_valid
+    @PostPage.is_comment_author
     def get(self, post_key, comment_key):
         """ Display the form to edit a comment
 
@@ -20,7 +22,8 @@ class EditComment(CommentPage):
         self.render_editcomment(form)
 
     @Handler.login_required(True)
-    @CommentPage.is_edit_authorized
+    @PostPage.is_post_valid
+    @PostPage.is_comment_author
     def post(self, post_key, comment_key):
         """ Update comment and redirect user to the post page
 

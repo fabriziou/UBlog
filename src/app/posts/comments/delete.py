@@ -1,12 +1,13 @@
 from framework.request_handler import Handler
-from app.comments.commentpage import CommentPage
+from app.posts.postpage import PostPage
 from models.comment import Comment
 
 
-class DeleteComment(CommentPage):
+class DeleteComment(PostPage):
 
     @Handler.login_required(True)
-    @CommentPage.is_edit_authorized
+    @PostPage.is_post_valid
+    @PostPage.is_comment_author
     def get(self, post_key, comment_key):
         """ Delete a comment
         """

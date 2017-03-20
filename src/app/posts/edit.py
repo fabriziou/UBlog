@@ -8,7 +8,7 @@ class EditPost(PostPage):
 
     @Handler.login_required(True)
     @PostPage.is_post_valid
-    @PostPage.is_author
+    @PostPage.is_post_author
     def get(self, post_key):
         """ Display the form to edit a post
 
@@ -21,7 +21,7 @@ class EditPost(PostPage):
 
     @Handler.login_required(True)
     @PostPage.is_post_valid
-    @PostPage.is_author
+    @PostPage.is_post_author
     def post(self, post_key):
         """ Update post and redirect user to the post page
 
