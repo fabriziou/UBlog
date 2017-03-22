@@ -5,16 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blog | {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/font-awesome/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
     <link rel="stylesheet" href="/static/css/master.css">
   </head>
   <body>
     {% include "commons/navbar.html" %}
-    <div class="container">
-      {% block content %}
-      {% endblock %}
+
+    <div class="jumbotron">
+      <div class="container">
+        {% block jumbotron %}
+        {% endblock %}
+      </div>
     </div>
-    <script src="/static/js/jquery/jquery.min.js"></script>
-    <script src="/static/js/bootstrap-sass/bootstrap.min.js"></script>
+
+    <div class="content">
+      <div class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
   </body>
 </html>

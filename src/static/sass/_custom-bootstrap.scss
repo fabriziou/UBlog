@@ -1,0 +1,32 @@
+body {
+  background-image: url('../img/bg_blue_black.png');
+  padding-top: 10px;
+}
+
+p {
+  margin: 15px 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// NAVBAR
+
+.navbar-default {
+  .navbar-brand {
+    font-size: 28px;
+  }
+
+  .btn {
+    font-size: 18px;
+    margin-left: 15px;
+  }
+}
+
+.jumbotron {
+  h2 {
+    font-weight: bold;
+  }
+}

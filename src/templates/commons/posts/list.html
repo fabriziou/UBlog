@@ -1,16 +1,41 @@
-{% if posts %}
-  {% for post in posts %}
-    {% if user %}
-      {% if post.parent().key() == user.key() %}
-        <h4><a href="/posts/edit/{{ post.key() }}">Edit</a></h4>
-        <h4><a href="/posts/delete/{{ post.key() }}">Delete</a></h4>
-      {% endif %}
-    {% endif %}
-    <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">{{ post.title }}</a>
-    <br>
-    {{ post.content }}
-    <br>
-    Created by {{ post.parent().username }} on {{ post.creation_date }}
-    <hr>
-  {% endfor %}
-{% endif %}
+<div class="row posts">
+  {% if posts %}
+    {% for post in posts %}
+      <!-- POST Begin -->
+      <div class="col-sm-6">
+        <p class="post-details text-center">
+          <i class="fa fa-calendar-o"></i>  {{ post.creation_date.strftime('%d-%m-%Y') }}
+        </p>
+
+        <div class="post">
+          <h3 class="headline">{{ post.title }}</h3>
+
+          <p>
+            {{ post.content|truncate(250, False, '...') }}
+          </p>
+          <p class="text-right">
+            <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">Read more</a>
+          </p>
+
+          <p class="post-details">
+            <i class="fa fa-heart"></i> {{ nb_likes[post.key()] }} likes
+            <span class="pull-right"><i class="fa fa-user-circle"></i> {{ post.parent().username }}</span>
+          </p>
+        </div>
+      </div>
+      <!-- POST End -->
+      <!-- {% if user %}
+        {% if post.parent().key() == user.key() %}
+          <h4><a href="/posts/edit/{{ post.key() }}">Edit</a></h4>
+          <h4><a href="/posts/delete/{{ post.key() }}">Delete</a></h4>
+        {% endif %}
+      {% endif %} -->
+    {% endfor %}
+  {% else %}
+    <div class="col-sm-8 col-sm-offset-4">
+      <i class="fa pull-left fa-frown-o fa-5x"></i>
+      <p class="h1">There is no post!</p>
+      <p>Why don't you write one?</p>
+    </div>
+  {% endif %}
+</div>

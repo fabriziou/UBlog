@@ -1,0 +1,32 @@
+/* CONTENT */
+
+.content {
+  background-color: $gray-lighter;
+  min-height: 80vh;
+}
+
+.posts {
+  .col-sm-6:nth-child(even) {
+    border-left: 1px dotted #c3c3c3;
+  }
+
+  .col-sm-6 {
+    border-bottom: 1px dotted #c3c3c3;
+  }
+}
+
+.post {
+  background-color: #ffffff;
+  border-bottom: 1px solid #d1d1d7;
+
+  margin: 0 0 20px;
+  padding: 5px 15px;
+}
+
+.post-details {
+  color: $gray-light;
+}
+
+.headline {
+  font-family: 'Roboto Slab', serif;
+}

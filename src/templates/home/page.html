@@ -4,7 +4,28 @@
   Home
 {% endblock%}
 
+{% block jumbotron %}
+  <div class="row">
+    <div class="col-sm-7">
+      <h2 class="headline">Lorem ipsum dolor sit?</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Etenim nec iustitia nec amicitia esse omnino poterunt, nisi ipsae per se expetuntur.
+      </p>
+      <p class="text-right"><a class="btn btn-primary btn-lg" href="#" role="button">Sign up</a></p>
+    </div>
+    <div class="col-sm-5 text-center">
+      <i class="fa fa-file-text-o fa-20x" aria-hidden="true"></i>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>All posts</h1>
-  {% include "commons/posts/list.html" %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Latest posts</h2>
+
+      {% include "commons/posts/list.html" %}
+    </div>
+  </div>
 {% endblock %}

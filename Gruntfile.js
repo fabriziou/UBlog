@@ -8,7 +8,9 @@ module.exports = function(grunt) {
         options: {
           targetDir: 'src/static/',
           cleanTargetDir: false,
-          layout: 'byType',
+          layout: function(type, component, source) {
+              return type;
+          }
         }
       }
     },

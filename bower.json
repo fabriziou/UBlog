@@ -21,7 +21,8 @@
   },
   "exportsOverride": {
     "bootstrap-sass": {
-      "sass": ["assets/stylesheets/"],
+      "sass": ["assets/stylesheets/_bootstrap.scss"],
+      "sass/bootstrap": ["assets/stylesheets/bootstrap"],
       "js": ["assets/javascripts/bootstrap.js",
               "assets/javascripts/bootstrap.min.js"]
     },
@@ -29,7 +30,7 @@
       "js": ["dist/jquery.min.js"]
     },
     "font-awesome": {
-      "css": ["css/*.css"],
+      "css": ["css/font-awesome.css"],
       "fonts": ["fonts/*"]
     }
   }
