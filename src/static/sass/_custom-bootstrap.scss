@@ -12,6 +12,14 @@ p {
   flex-wrap: wrap;
 }
 
+.btn-primary {
+  .btn-primary:hover{
+    background-color: #1b384f;
+    border-color: #1b384f;
+  }
+  border-bottom: 3px solid #1b384f;
+}
+
 // NAVBAR
 
 .navbar-default {
@@ -22,7 +30,6 @@ p {
   .btn {
     font-size: 18px;
     margin-left: 15px;
-    border-bottom: 3px solid #1b384f;
   }
 }
 

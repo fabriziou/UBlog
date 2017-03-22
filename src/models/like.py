@@ -67,3 +67,20 @@ class Like(db.Model):
         likes = cls.all().ancestor(post).filter("is_deleted", False)
 
         return likes.count()
+
+    @classmethod
+    def get_likes_per_posts(cls, posts):
+        """ Get the number of likes for a given list of posts
+
+            :param posts:
+                List of posts
+            :returns:
+                A dictionary containing
+                the key of post and the number of likes
+        """
+        likes = {}
+
+        for post in posts:
+            likes[post.key()] = cls.get_nb_like(post)
+            
+        return likes

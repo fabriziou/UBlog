@@ -5825,6 +5825,12 @@ p {
   display: flex;
   flex-wrap: wrap; }
 
+.btn-primary {
+  border-bottom: 3px solid #1b384f; }
+  .btn-primary .btn-primary:hover {
+    background-color: #1b384f;
+    border-color: #1b384f; }
+
 .navbar-default .navbar-brand {
   font-size: 28px; }
 

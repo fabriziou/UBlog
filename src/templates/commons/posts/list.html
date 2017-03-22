@@ -18,7 +18,7 @@
           </p>
 
           <p class="post-details">
-            <i class="fa fa-heart"></i> {{ nb_likes[post.key()] }} likes
+            <i class="fa fa-heart-o"></i> {{ nb_likes[post.key()] }} likes
             <span class="pull-right"><i class="fa fa-user-circle"></i> {{ post.parent().username }}</span>
           </p>
         </div>
@@ -39,3 +39,5 @@
     </div>
   {% endif %}
 </div>
+
+{% include "commons/pagination.html" %}
