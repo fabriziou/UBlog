@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="/static/css/master.css">
   </head>
   <body>
-    {% include "commons/navbar.html" %}
+    <div class="top-page">
+      {% include "commons/navbar.html" %}
 
-    <div class="jumbotron">
-      <div class="container">
-        {% block jumbotron %}
-        {% endblock %}
+      <div class="jumbotron">
+        <div class="container">
+          {% block jumbotron %}
+          {% endblock %}
+        </div>
       </div>
     </div>
 

@@ -1,5 +1,4 @@
 body {
-  background-image: url('../img/bg_blue_black.png');
   padding-top: 10px;
 }
 
@@ -36,5 +35,9 @@ p {
 .jumbotron {
   h2 {
     font-weight: bold;
+  }
+
+  .fa {
+    color: #1b384f;
   }
 }

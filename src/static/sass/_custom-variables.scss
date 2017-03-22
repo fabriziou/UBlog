@@ -28,7 +28,7 @@ $primary-color:         #12aee0;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #3c739e !default;
+$body-bg:                 $gray-lighter !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-darker !default;
 
@@ -55,7 +55,7 @@ $font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
 
 $font-size-h1:            floor(($font-size-base * 2.6)) !default; // ~36px
-$font-size-h2:            floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h2:            floor(($font-size-base * 2.3)) !default; // ~30px
 $font-size-h3:            ceil(($font-size-base * 1.7)) !default; // ~24px
 $font-size-h4:            ceil(($font-size-base * 1.25)) !default; // ~18px
 $font-size-h5:            $font-size-base !default;

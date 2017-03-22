@@ -1,8 +1,7 @@
 /* CONTENT */
 
-.content {
-  background-color: $gray-lighter;
-  min-height: 80vh;
+.top-page {
+  background-image: url('../img/bg_blue_black.png');
 }
 
 .posts {
@@ -11,7 +10,7 @@
   }
 
   .col-sm-6 {
-    border-bottom: 1px dotted #c3c3c3;
+    border-top: 1px dotted #c3c3c3;
   }
 }
 
