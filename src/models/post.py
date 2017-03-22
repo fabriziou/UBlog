@@ -45,15 +45,41 @@ class Post(db.Model):
         return posts
 
     @classmethod
-    def get_all(cls, order_by="-creation_date"):
-        """ Return all posts that are not deleted
+    def get_all(cls, order_by="-creation_date", limit=None, offset=0):
+        """ Return posts that are not deleted
 
             :param order_by:
                 Property to sort on
+            :param limit:
+                Number of posts we want to retrieve
+            :param offset:
+                Optional number of results to skip first
             :returns:
                 List of Posts
         """
-        return cls.all().filter("is_deleted", False).order(order_by)
+        res = cls.all().filter("is_deleted", False).order(order_by)
+        if limit:
+            res = res.fetch(limit=limit, offset=offset)
+        return res
+
+    @classmethod
+    def get_nb_posts(cls, user=None):
+        """ Get number of posts
+
+            :param user:
+                User entity
+            :returns:
+                Number of posts
+        """
+        posts = cls.all()
+
+        if user:
+            posts = posts.ancestor(user)
+
+        posts = posts.filter("is_deleted", False)
+
+        return posts.count()
+
 
     @staticmethod
     def update_post(post, title, content):
