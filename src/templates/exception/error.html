@@ -1,24 +1,30 @@
+{% set has_error = "has-error" %}
 {% extends "base.html" %}
 
 {% block title %}
   Error
 {% endblock%}
 
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2 class="h1 headline">Oops! An error occured</h2>
+      <p>
+        {% if errors %}
+          {% for error in errors %}
+              {{ error }}
+          {% endfor %}
+          {% if debug %}
+            {{ exception.title() }}
+          {% endif %}
+        {% elif debug %}
+          {{ exception }}
+        {% endif %}
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>Oops! An error occurred</h1>
 
-  {% if errors %}
-    {% for error in errors %}
-        {{ error }}
-    {% endfor %}
-  {% endif %}
-
-  {% if debug %}
-    <p>
-      <h3>DEBUG</h3>
-      <code>
-        {{ exception }}
-      </code>
-    </p>
-  {% endif %}
 {% endblock %}

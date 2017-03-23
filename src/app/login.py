@@ -56,10 +56,9 @@ class LoginPage(Handler):
 
             if password_hashed == user.password:
                 return user.key()
-            else:
-                self.errors.append("Password doesn't match")
-        else:
-            self.errors.append("No user found with this email")
+
+        self.errors.append("""Sorry, the <b>email</b> and <b>password</b>
+                            you entered do not match. Please try again.""")
 
         return False
 

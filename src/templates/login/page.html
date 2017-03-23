@@ -1,34 +1,27 @@
+{% set page="login"%}
 {% extends "base.html" %}
 
 {% block title %}
-  Login
+  Log in
 {% endblock%}
 
-{% block content %}
-  <h1>Log in</h1>
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2 class="h1 headline">Log in</h2>
+      <p>Just one more step before to post!</p>
+    </div>
+  </div>
+{% endblock %}
 
-  {% if errors %}
-    {% for error in errors %}
-        {{ error }}
-    {% endfor %}
-  {% endif %}
-  <form method="post">
-    {{ form.email.label }}
-    {{ form.email() }}
-    {% if form.email.errors %}
-      {% for error in form.email.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    {{ form.password.label }}
-    {{ form.password() }}
-    {% if form.password.errors %}
-      {% for error in form.password.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+{% block content %}
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <p>Use your credentials to connect to your account</p>
+
+      {% include("commons/form.html") %}
+
+    </div>
+  </div>
 {% endblock %}

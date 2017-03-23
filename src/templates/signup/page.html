@@ -1,45 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}
-Sign up
+  Sign up
 {% endblock%}
 
-{% block content %}
-  <h1>Sign up</h1>
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2 class="h1 headline">Sign up</h2>
+      <p>Just one more step before to post!</p>
+    </div>
+  </div>
+{% endblock %}
 
-  <form method="post">
-    {{ form.email.label }}
-    {{ form.email() }}
-    {% if form.email.errors %}
-      {% for error in form.email.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    {{ form.username.label }}
-    {{ form.username() }}
-    {% if form.username.errors %}
-      {% for error in form.username.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    {{ form.password.label }}
-    {{ form.password() }}
-    {% if form.password.errors %}
-      {% for error in form.password.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    {{ form.confirm.label }}
-    {{ form.confirm() }}
-    {% if form.confirm.errors %}
-      {% for error in form.confirm.errors %}
-        {{ error }}
-      {% endfor %}
-    {% endif %}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+{% block content %}
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <p>Please fill-in this form to create your account.</p>
+
+      {% include("commons/form.html") %}
+
+    </div>
+  </div>
 {% endblock %}

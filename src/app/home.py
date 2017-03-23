@@ -5,7 +5,7 @@ from models.pagination import Pagination
 
 
 class HomePage(Handler):
-    def get(self, page_id=None):
+    def get(self, page_id=1):
 
         pagination = Pagination(page_id)
         posts = Post.get_all(limit=pagination.posts_per_page,

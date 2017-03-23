@@ -1196,7 +1196,7 @@ h1, .h1 {
   font-size: 41px; }
 
 h2, .h2 {
-  font-size: 36px; }
+  font-size: 34px; }
 
 h3, .h3 {
   font-size: 28px; }
@@ -4281,16 +4281,16 @@ a.badge:hover, a.badge:focus {
   cursor: pointer; }
 
 .jumbotron {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
   color: #222222;
   background-color: transparent; }
   .jumbotron h1,
   .jumbotron .h1 {
     color: inherit; }
   .jumbotron p {
-    margin-bottom: 15px;
+    margin-bottom: 7.5px;
     font-size: 24px;
     font-weight: 200; }
   .jumbotron > hr {
@@ -4304,15 +4304,15 @@ a.badge:hover, a.badge:focus {
     max-width: 100%; }
   @media screen and (min-width: 768px) {
     .jumbotron {
-      padding-top: 48px;
-      padding-bottom: 48px; }
+      padding-top: 24px;
+      padding-bottom: 24px; }
       .container .jumbotron,
       .container-fluid .jumbotron {
-        padding-left: 60px;
-        padding-right: 60px; }
+        padding-left: 30px;
+        padding-right: 30px; }
       .jumbotron h1,
       .jumbotron .h1 {
-        font-size: 72px; } }
+        font-size: 88px; } }
 
 .thumbnail {
   display: block;
@@ -5814,9 +5814,6 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-body {
-  padding-top: 10px; }
-
 p {
   margin: 15px 0; }
 
@@ -5826,18 +5823,21 @@ p {
 
 .btn-primary {
   border-bottom: 3px solid #1b384f; }
-  .btn-primary .btn-primary:hover {
-    background-color: #1b384f;
-    border-color: #1b384f; }
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus {
+  background-color: #1b384f;
+  border-color: #1b384f; }
 
 .navbar-default .navbar-brand {
-  font-size: 28px; }
+  font-size: 34px; }
 
 .navbar-default .btn {
   font-size: 18px;
   margin-left: 15px; }
 
-.jumbotron h2 {
+.jumbotron h1, .jumbotron h2 {
   font-weight: bold; }
 
 .jumbotron .fa {
@@ -5851,19 +5851,24 @@ p {
 
 /* CONTENT */
 .top-page {
-  background-image: url("../img/bg_blue_black.png"); }
-
-.posts .col-sm-6:nth-child(even) {
-  border-left: 1px dotted #c3c3c3; }
+  background-image: url("../img/bg_blue_black.png");
+  padding-top: 10px; }
+  .top-page.has-error {
+    background-image: url("../img/bg_error_11.png"); }
+    .top-page.has-error .btn, .top-page.has-error .btn-primary {
+      background-color: #a02a03;
+      border-color: #7d2306; }
 
 .posts .col-sm-6 {
   border-top: 1px dotted #c3c3c3; }
+  .posts .col-sm-6:nth-child(even) {
+    border-left: 1px dotted #c3c3c3; }
 
 .post {
   background-color: #ffffff;
   border-bottom: 1px solid #d1d1d7;
   margin: 0 0 20px;
-  padding: 5px 15px; }
+  padding: 15px; }
 
 .post-details {
   color: #777777; }

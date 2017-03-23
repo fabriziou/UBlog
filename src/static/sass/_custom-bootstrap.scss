@@ -1,7 +1,3 @@
-body {
-  padding-top: 10px;
-}
-
 p {
   margin: 15px 0;
 }
@@ -12,18 +8,21 @@ p {
 }
 
 .btn-primary {
-  .btn-primary:hover{
-    background-color: #1b384f;
-    border-color: #1b384f;
-  }
   border-bottom: 3px solid #1b384f;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus {
+  background-color: #1b384f;
+  border-color: #1b384f;
 }
 
 // NAVBAR
 
 .navbar-default {
   .navbar-brand {
-    font-size: 28px;
+    font-size: 34px;
   }
 
   .btn {
@@ -33,7 +32,7 @@ p {
 }
 
 .jumbotron {
-  h2 {
+  h1, h2 {
     font-weight: bold;
   }
 

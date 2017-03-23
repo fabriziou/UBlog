@@ -16,7 +16,7 @@
           <li><a href="/logout">Logout</a></li>
         {% else %}
         {### VISITOR MENU ###}
-          <li><a href="/login">Login</a></li>
+          <li><a href="/login"{% if page=="login" %} class="active" {% endif %}>Log in</a></li>
         {% endif %}
       </ul>
     </div>
