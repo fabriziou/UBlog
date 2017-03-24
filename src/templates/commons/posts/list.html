@@ -2,23 +2,21 @@
   {% if posts %}
     {% for post in posts %}
       <!-- POST Begin -->
-      <div class="col-sm-6">
-        <p class="post-details text-center">
-          <i class="fa fa-calendar-o"></i>  {{ post.creation_date.strftime('%d-%m-%Y') }}
-        </p>
-
-        <div class="post">
+      <div class="col-sm-6 post">
+        <div class="post-content">
+          <p class="small pull-right">
+            <i class="fa fa-calendar-o"></i>  {{ post.creation_date.strftime('%d-%m-%Y') }}
+          </p>
           <h3 class="headline"><a href="/posts/view/{{ post.key() }}">{{ post.title }}</a></h3>
-
           <p>
             {{ post.content|truncate(250, False, '...') }}
           </p>
           <p class="text-right">
             <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">Read more</a>
           </p>
-
-          <p class="post-details">
-            <i class="fa fa-heart-o"></i> {{ nb_likes[post.key()] }} likes
+          <p class="small">
+            <i class="fa fa-heart-o"></i> {{ nb_likes[post.key()] }} like {{'s' if nb_likes[post.key()] > 1 }} ·
+            <i class="fa fa-comments-o"></i> {{ nb_comments[post.key()] }} comment {{'s' if nb_comments[post.key()] > 1 }}
             <span class="pull-right"><i class="fa fa-user-circle"></i> {{ post.parent().username }}</span>
           </p>
         </div>
