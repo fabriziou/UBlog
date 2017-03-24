@@ -2,7 +2,7 @@ from webapp2 import WSGIApplication, Route
 
 app = WSGIApplication([
     # Home
-    Route(r"/<page_id:\d*>",
+    Route(r"/",
           handler="app.home.HomePage", name="home"),
     Route(r"/register",
           handler="app.registration.RegistrationPage", name="signup"),

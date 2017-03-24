@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-  Your posts
+  List of your posts
 {% endblock%}
 
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2 class="h1 headline">List of your posts</h2>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>Your posts</h1>
   {% include "commons/posts/list.html" %}
 {% endblock %}

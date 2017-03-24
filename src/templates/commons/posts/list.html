@@ -8,7 +8,7 @@
         </p>
 
         <div class="post">
-          <h3 class="headline">{{ post.title }}</h3>
+          <h3 class="headline"><a href="/posts/view/{{ post.key() }}">{{ post.title }}</a></h3>
 
           <p>
             {{ post.content|truncate(250, False, '...') }}

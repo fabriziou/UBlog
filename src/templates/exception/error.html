@@ -15,7 +15,7 @@
               {{ error }}
           {% endfor %}
           {% if debug %}
-            {{ exception.title() }}
+            {{ exception }}
           {% endif %}
         {% elif debug %}
           {{ exception }}
@@ -26,5 +26,5 @@
 {% endblock %}
 
 {% block content %}
-
+  <i class="fa fa-thumbs-down fa-20x" aria-hidden="true"></i>
 {% endblock %}

@@ -4,9 +4,18 @@
   {{ post.title }}
 {% endblock%}
 
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2 class="h1 headline">{{ post.title }}</h2>
+      <hr>
+      <p class="post-details headline"><i class="fa fa-calendar-o"></i> {{ post.creation_date.strftime("%A %d %B %Y") }}</p>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>Post {{ post.title }}</h1>
   {% include "commons/posts/view.html" %}
-  {% include "commons/comments/form.html" %}
+  {% include "commons/form.html" %}
   {% include "commons/comments/list.html" %}
 {% endblock %}

@@ -26,28 +26,11 @@ class Post(db.Model):
         return post.put()
 
     @classmethod
-    def get_all_by_user(cls, user, order_by="-creation_date"):
-        """ Return all posts from a given user that are not deleted
-
-            :param user:
-                Users entity
-            :param order_by:
-                Property to sort on
-            :returns:
-                List of Posts
-        """
-        posts = cls.all().ancestor(user)
-
-        posts.filter("is_deleted", False)
-
-        posts.order(order_by)
-
-        return posts
-
-    @classmethod
-    def get_all(cls, order_by="-creation_date", limit=None, offset=0):
+    def get_all(cls, user=None, order_by="-creation_date"):
         """ Return posts that are not deleted
 
+            :param user:
+                User entity
             :param order_by:
                 Property to sort on
             :param limit:
@@ -57,9 +40,13 @@ class Post(db.Model):
             :returns:
                 List of Posts
         """
-        res = cls.all().filter("is_deleted", False).order(order_by)
-        if limit:
-            res = res.fetch(limit=limit, offset=offset)
+        res = cls.all()
+
+        if user:
+            res = res.ancestor(user)
+
+        res = res.filter("is_deleted", False).order(order_by)
+
         return res
 
     @classmethod

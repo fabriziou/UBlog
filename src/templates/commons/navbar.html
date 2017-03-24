@@ -4,21 +4,22 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="/">Blog</a>
       </div>
-
-
-      <a href="/register" class="btn btn-primary navbar-btn pull-right">Sign up</a>
+      {% if user %}
+        <a href="/posts/add" class="btn btn-primary navbar-btn"><i class="fa fa-plus"></i> New Post</a>
+      {% else %}
+        <a href="/register" class="btn btn-primary navbar-btn pull-right">Sign up</a>
+      {% endif %}
       <ul class="nav navbar-nav navbar-right">
         {### USER MENU ###}
         {% if user %}
-          <li><a href="/posts">Posts</a></li>
-          <li><a href="/posts/add">New post</a></li>
-          <li><a href="/posts">{{ user.username }}</a></li>
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/posts"><i class="fa fa-th-list"></i> Posts</a></li>
+          <li><a href="/posts"><i class="fa fa-user-circle"></i> {{ user.username }}</a></li>
+          <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
         {% else %}
-        {### VISITOR MENU ###}
-          <li><a href="/login"{% if page=="login" %} class="active" {% endif %}>Log in</a></li>
+          <li><a href="/login">Log in</a></li>
         {% endif %}
       </ul>
+
     </div>
   </nav>
 {% endblock %}

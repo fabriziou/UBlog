@@ -13,27 +13,46 @@ $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
 $gray:                   lighten($gray-base, 33.5%) !default; // #555
 $gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-light2:             lighten($gray-base, 72.7%) !default; 
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+$gray-white:              #fff !default;
 
-$brand-primary:         #285375 !default; // #337ab7
+
+$blue-base:              #0d1922 !default;
+$blue-darker:            lighten($blue-base, 13.5%) !default;
+$blue-dark:              lighten($blue-base, 20%) !default;
+$blue:                   lighten($blue-base, 33.5%) !default;
+$blue-light:             lighten($blue-base, 46.7%) !default;
+$blue-lighter:           lighten($blue-base, 93.5%) !default;
+
+$red-base:              #671916 !default;
+$red-darker:            lighten($red-base, 13.5%) !default;
+$red-dark:              lighten($red-base, 20%) !default;
+$red:                   lighten($red-base, 33.5%) !default;
+$red-light:             lighten($red-base, 46.7%) !default;
+$red-lighter:           lighten($red-base, 93.5%) !default;
+
+$brand-primary:         $blue-dark !default;
 $brand-success:         #5cb85c !default;
 $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-$primary-color:         #12aee0;
+
+
+
 
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:                 $gray-lighter !default;
+$body-bg:               $gray-lighter !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-darker !default;
 
 //** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $blue-darker !default;
 //** Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%) !default;
 //** Link hover decoration.
