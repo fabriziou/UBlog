@@ -16,9 +16,9 @@
 }
 
 form {
-    .btn {
-      margin: $padding-large-horizontal 0;
-    }
+  .btn {
+    margin: $padding-large-horizontal 0;
+  }
 }
 
 hr {
@@ -69,6 +69,10 @@ hr {
   }
 
   .jumbotron {
+    h1 {
+      margin: 0;
+    }
+    
     hr {
       border-color: $gray-darker;
 
@@ -142,13 +146,24 @@ hr {
     .post-summarize {
       .small {
         color: $gray-light;
-        margin: 0;
+        margin: $padding-small-vertical 0;
       }
     }
 
     .post-actions {
-      border-bottom: 1px solid $gray-lighter;
-      margin: 0 0 $padding-base-vertical;
+
+      &:first-child {
+        border-bottom: 1px solid $gray-lighter;
+      }
+
+      &:last-child {
+        border-top: 1px solid $gray-lighter;
+      }
+
+      & > p {
+        margin: 0;
+        padding: $padding-small-vertical 0 0 0;
+      }
     }
   }
 }

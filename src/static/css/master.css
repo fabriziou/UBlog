@@ -5853,6 +5853,8 @@ hr {
     font-size: 41px; }
   .top-page .navbar .navbar-btn {
     margin-left: 16px; }
+  .top-page .jumbotron h1 {
+    margin: 0; }
   .top-page .jumbotron hr {
     border-color: #222222; }
     .top-page .jumbotron hr + p {
@@ -5897,10 +5899,14 @@ hr {
     border-left: 1px dotted #b9b9b9; }
   .posts .post .post-summarize .small {
     color: #777777;
-    margin: 0; }
-  .posts .post .post-actions {
-    border-bottom: 1px solid #eeeeee;
-    margin: 0 0 6px; }
+    margin: 5px 0; }
+  .posts .post .post-actions:first-child {
+    border-bottom: 1px solid #eeeeee; }
+  .posts .post .post-actions:last-child {
+    border-top: 1px solid #eeeeee; }
+  .posts .post .post-actions > p {
+    margin: 0;
+    padding: 5px 0 0 0; }
 
 .post .post-content {
   background-color: transparent;

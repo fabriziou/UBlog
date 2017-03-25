@@ -40,5 +40,7 @@ class ViewPost(PostPage):
             if comment_key:
                 self.redirect_to("viewpost", post_key=post_key,
                                  _fragment=str(comment_key))
+            else:
+                self.abort(500)
 
         self.render_viewpost(form, is_liked)

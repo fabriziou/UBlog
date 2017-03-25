@@ -28,6 +28,8 @@ class RegistrationPage(Handler):
                 cookie = create_cookie("uid", user_key)
                 self.response.headers.add_header("Set-Cookie", cookie)
                 self.redirect_to("home")
+            else:
+                self.abort(500)
 
         self.render_signup(form)
 

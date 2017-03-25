@@ -10,9 +10,13 @@ class DeleteComment(PostPage):
     @PostPage.is_comment_author
     def get(self, post_key, comment_key):
         """ Delete a comment
+
+            :param post_key:
+                Post to which the comment belongs to
+            :param comment_key:
+                Comment to delete
         """
-        success = Comment.delete_comment(self.user_comment)
-        if success:
+        if Comment.delete_comment(self.user_comment):
             self.redirect_to("viewpost", post_key=post_key)
         else:
-            self.abort(404)
+            self.abort(500)

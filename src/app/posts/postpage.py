@@ -27,8 +27,7 @@ class PostPage(Handler):
 
             # Check Post
             if (not self.post or self.post.is_deleted):
-                self.errors.append("Post unknown")
-                self.abort(404)
+                self.abort(404, "Unknown post")
 
             self.comments = Comment.get_all_by_post(self.post)
             self.nb_likes = Like.get_nb_like(self.post)
@@ -52,8 +51,7 @@ class PostPage(Handler):
         def is_valid(self, post_key):
             # Check author
             if (not self.user or self.post.parent().key() != self.user.key()):
-                self.errors.append("You are not allowed to update this post")
-                self.abort(404)
+                self.abort(404, "You are not allowed to update this post")
 
             return func(self, post_key)
         return is_valid
@@ -72,18 +70,11 @@ class PostPage(Handler):
 
             # Check Comment
             if (not self.user_comment or self.user_comment.is_deleted):
-                self.errors.append("Unknown comment")
-                self.abort(404)
+                self.abort(404, "Unknown comment")
 
             # Check Author
             if self.user_comment.user.key() != self.user.key():
-                self.errors.append("You are not allowed " +
-                                   "to update this comment")
-                self.abort(404)
-
-            comment_date = self.user_comment.creation_date
-            self.comments = Comment.get_all_by_post(self.post,
-                                                    before=comment_date)
+                self.abort(404, "You are not allowed to update this comment")
 
             return func(self, post_key, comment_key)
         return is_valid

@@ -24,7 +24,7 @@ class LikePost(PostPage):
             if success:
                 self.redirect_to("viewpost", post_key=post_key, _fragment="liked")
             else:
-                self.abort(404)
+                self.abort(500)
 
         else:
             self.errors.append("You can't like your own post")

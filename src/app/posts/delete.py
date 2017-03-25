@@ -9,10 +9,12 @@ class DeletePost(PostPage):
     @PostPage.is_post_valid
     @PostPage.is_post_author
     def get(self, post_key):
-        """ List all user's posts
+        """ Delete user post
+
+            :param post_key:
+                Key of the post to delete
         """
-        success = Post.delete_post(self.post)
-        if success:
+        if Post.delete_post(self.post):
             self.redirect_to("userposts")
         else:
-            self.abort(404)
+            self.abort(500)

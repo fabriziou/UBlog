@@ -35,5 +35,7 @@ class EditPost(PostPage):
         if form.validate():
             if Post.update_post(self.post, form.title.data, form.content.data):
                 self.redirect_to("viewpost", post_key=post_key)
+            else:
+                self.abort(500)
 
         self.render_editpost(form)

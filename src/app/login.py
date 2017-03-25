@@ -11,6 +11,7 @@ class LoginPage(Handler):
         """ Display the form to login
         """
         form = LoginForm()
+
         self.render_login(form)
 
     @Handler.login_required(False)
@@ -24,6 +25,7 @@ class LoginPage(Handler):
             display form with errors details
         """
         form = LoginForm(self.request.POST)
+        errors = []
 
         if form.validate():
             user_key = self.valid_login_credentials(form.email.data,
@@ -34,8 +36,11 @@ class LoginPage(Handler):
                 cookie = create_cookie("uid", user_key)
                 self.response.headers.add_header("Set-Cookie", cookie)
                 self.redirect_to("home")
+            else:
+                errors.append("""Sorry, the <b>email</b> and <b>password</b>
+                              you entered do not match. Please try again.""")
 
-        self.render_login(form)
+        self.render_login(form, errors)
 
     def valid_login_credentials(self, email, password):
         """Validate if email and password belongs to an account
@@ -57,13 +62,10 @@ class LoginPage(Handler):
             if password_hashed == user.password:
                 return user.key()
 
-        self.errors.append("""Sorry, the <b>email</b> and <b>password</b>
-                            you entered do not match. Please try again.""")
-
         return False
 
-    def render_login(self, form):
+    def render_login(self, form, errors=None):
         """ Include all datas in a template
             and render the page
         """
-        self.render("login/page.html", form=form)
+        self.render("login/page.html", form=form, errors=errors)

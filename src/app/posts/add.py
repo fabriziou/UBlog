@@ -28,5 +28,7 @@ class AddPost(PostPage):
 
             if post_key:
                 self.redirect_to("viewpost", post_key=post_key)
+            else:
+                self.abort(500)
 
         self.render_addpost(form)

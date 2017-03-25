@@ -4,7 +4,7 @@
       <!-- Errors post Form validation -->
       <div class="alert alert-danger" role="alert">
         {% for error in errors %}
-            <i class="fa fa-exclamation"></i> {{ error|safe }}
+            <i class="fa fa-exclamation-triangle"></i> {{ error|safe }}
         {% endfor %}
       </div>
     {% endif %}
