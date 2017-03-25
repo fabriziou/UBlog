@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-  Error
+  Error {{ exception.code if exception }}
 {% endblock%}
 
 {% block jumbotron %}
@@ -10,14 +10,7 @@
     <div class="col-sm-12">
       <h1 class="headline">Oops! An error occured</h1>
       <p>
-        {% if errors %}
-          {% for error in errors %}
-              {{ error }}
-          {% endfor %}
-          {% if debug %}
-            {{ exception }}
-          {% endif %}
-        {% elif debug %}
+        {% if debug %}
           {{ exception }}
         {% endif %}
       </p>
@@ -26,5 +19,7 @@
 {% endblock %}
 
 {% block content %}
-  <i class="fa fa-thumbs-down fa-20x" aria-hidden="true"></i>
+  <p class="text-center">
+    <i class="fa fa-times fa-20x" aria-hidden="true"></i>
+  </p>
 {% endblock %}

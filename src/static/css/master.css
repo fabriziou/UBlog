@@ -5839,13 +5839,15 @@ hr {
 .top-page {
   background-image: url("../img/bg_blue_black.png"); }
   .top-page.has-error {
-    background-image: none;
-    background-color: #d9544f; }
+    background-image: url("../img/bg_red_black.png"); }
+    .top-page.has-error h1,
+    .top-page.has-error p {
+      color: #581b15; }
     .top-page.has-error .btn-primary {
-      background-color: #bb2d28;
-      border-color: #a02722; }
+      background-color: #aa3429;
+      border-color: #902c22; }
       .top-page.has-error .btn-primary:hover, .top-page.has-error .btn-primary:focus, .top-page.has-error .btn-primary.focus {
-        background-color: #a02722; }
+        background-color: #902c22; }
   .top-page .navbar.navbar-default,
   .top-page .navbar .btn {
     font-size: 20px; }
@@ -5873,7 +5875,7 @@ hr {
   border-left: 5px solid #23618e; }
 
 .comments .is_author .comment-content {
-  border-left-color: #bb2d28; }
+  border-left-color: #aa3429; }
 
 .comments .comment-author {
   border-bottom: 1px solid #eeeeee;
@@ -5922,7 +5924,7 @@ hr {
     padding-right: 8px;
     padding-left: 3px; }
   .post .post-content .fa-heart:hover {
-    color: #d9544f; }
+    color: #d35245; }
   .post .post-content .post-author {
     padding: 32px 0; }
     .post .post-content .post-author > * {
@@ -5931,5 +5933,5 @@ hr {
     color: #1d4f73;
     font-weight: bold; }
   .post .post-content .is_liked a {
-    color: #d9544f;
+    color: #d35245;
     font-weight: bold; }
