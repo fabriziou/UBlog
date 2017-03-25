@@ -9,13 +9,27 @@
     <div class="col-sm-12">
       <h1 class="headline">{{ post.title }}</h1>
       <hr>
-      <p class="post-details headline"><i class="fa fa-calendar-o"></i> {{ post.creation_date.strftime("%A %d %B %Y") }}</p>
+      <p><i class="fa fa-calendar-o"></i> {{ post.creation_date.strftime("%A %d %B %Y") }}</p>
     </div>
   </div>
 {% endblock %}
 
 {% block content %}
   {% include "commons/posts/view.html" %}
-  {% include "commons/form.html" %}
-  {% include "commons/comments/list.html" %}
+  <hr>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      {% include "commons/comments/list.html" %}
+
+      {% if user %}
+        <h2 id="newcomment">Add a comment</h2>
+        <div class="form-comment">
+          <p class="comment-author">
+            <i class="fa fa-user-circle fa-lg"></i> {{ user.username }}
+          </p>
+            {% include "commons/form.html" %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

@@ -1,25 +1,46 @@
 <form method="post">
-  <div class="post">
+  <div class="form">
     {% if errors %}
+      <!-- Errors post Form validation -->
       <div class="alert alert-danger" role="alert">
         {% for error in errors %}
-            {{ error|safe }}
+            <i class="fa fa-exclamation"></i> {{ error|safe }}
         {% endfor %}
       </div>
     {% endif %}
-    {% for field in form %}
-      {% if field.type != "SubmitField" %}
-        <div class="form-group {% if field.errors %} has-error {% endif %}">
-          {{ field.label }} {% if field.flags.required %}*{% endif %}
-          {{ field(class_="form-control") }}
-          {% if field.errors %}
-            <span id="{{field.id}}" class="help-block">{{ field.errors.0 }}</span>
-          {% endif %}
-        </div>
-      {% else %}
-        </div> <!-- END .post -->
-        {{ field(class_="btn btn-primary btn-lg btn-block") }}
-      {% endif %}
-    {% endfor %}
 
+    {% if form %}
+      {% for field in form %}
+
+        {% if field.type != "SubmitField" %}
+          <div class="form-group {% if field.errors %} has-error {% endif %}">
+            <!-- Label -->
+            {{ field.label }} {% if field.flags.required %}*{% endif %}
+
+            <!-- Field -->
+            {% if field.type != "TextAreaField"  %}
+              {{ field(class_="form-control") }}
+            {% else %}
+            <!-- Field = Textarea -->
+              {% if field.id != "comment" %}
+                {{ field(class_="form-control", rows='20',cols='100') }}
+              {% else %}
+                {{ field(class_="form-control", rows='5',cols='100') }}
+              {% endif %}
+            {% endif %}
+
+            <!-- Field Error -->
+            {% if field.errors %}
+              <span id="{{field.id}}" class="help-block">{{ field.errors.0 }}</span>
+            {% endif %}
+          </div>
+
+        {% else %}
+        <!-- Submit Button -->
+          </div> <!-- END .form -->
+          {{ field(class_="btn btn-primary btn-lg btn-block") }}
+        {% endif %}
+
+      {% endfor %}
+    {% endif %}
 </form>

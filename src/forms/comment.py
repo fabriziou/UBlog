@@ -5,6 +5,7 @@ from wtforms.validators import InputRequired, Length
 class CommentForm(Form):
     content = TextAreaField("Comment",
                             [InputRequired(),
-                             Length(min=5)])
+                             Length(min=5)],
+                             id="comment")
 
     submit = SubmitField()

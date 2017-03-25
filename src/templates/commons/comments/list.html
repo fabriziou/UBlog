@@ -1,14 +1,36 @@
-{% if comments %}
-  {% for comment in comments %}
-    {% if user %}
-      {% if comment.user.key() == user.key() %}
-        <h3><a href="/posts/{{ post.key() }}/comments/edit/{{ comment.key() }}">Edit</a></h3>
-        <h3><a href="/posts/{{ post.key() }}/comments/delete/{{ comment.key() }}">Delete</a></h3>
-      {% endif %}
-    {% endif %}
-    <span id="{{comment.key()}}">{{ comment.content }}</span>
-    <br>
-    Created by {{ comment.user.username }} on {{ comment.creation_date }}
-    <hr>
-  {% endfor %}
+{% if nb_comments > 0 %}
+  <h2>Comments</h2>
+  <div class="row comments">
+    {% for comment in comments %}
+      <div class="col-sm-12 comment {{ 'is_author' if comment.user.key() == post.parent().key() }}" id="{{comment.key()}}">
+        <div class="comment-content">
+          <!-- Author -->
+          <p class="comment-author">
+            <i class="fa fa-user-circle fa-lg"></i> {{ comment.user.username }}
+
+            {% if user %}
+              {% if comment.user.key() == user.key() %}
+              <!-- Admin Comment -->
+                <span class="pull-right small">
+                  <a href="/posts/{{ post.key() }}/comments/edit/{{ comment.key() }}">Edit</a> ·
+                  <a href="/posts/{{ post.key() }}/comments/delete/{{ comment.key() }}">Delete</a>
+                </span>
+              {% endif %}
+            {% endif %}
+          </p>
+
+          <blockquote>
+            {{ comment.content|nl2br }}
+            <footer>
+              {{ comment.creation_date.strftime("%d %B %Y, %H:%M") }}
+              {% if comment.creation_date != comment.last_modification %}
+                - Edited on {{ comment.last_modification.strftime("%d %B %Y, %H:%M") }}
+              {% endif %}
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
 {% endif %}

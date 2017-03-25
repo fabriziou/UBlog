@@ -26,7 +26,8 @@ app = WSGIApplication([
           handler="app.posts.like.LikePost", name="likepost"),
 
     # /comments
-    Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/edit/<comment_key:[a-zA-Z0-9-_]+>",
+    Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/"
+          + "edit/<comment_key:[a-zA-Z0-9-_]+>",
           handler="app.posts.comments.edit.EditComment", name="editcomment"),
     Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/delete/<comment_key:[a-zA-Z0-9-_]+>",
           handler="app.posts.comments.delete.DeleteComment", name="deletecomment")

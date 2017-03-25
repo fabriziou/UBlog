@@ -67,7 +67,6 @@ class Post(db.Model):
 
         return posts.count()
 
-
     @staticmethod
     def update_post(post, title, content):
         """ Update post

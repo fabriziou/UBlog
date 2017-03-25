@@ -2,7 +2,7 @@ from google.appengine.ext import db
 from hashlib import sha256
 from base64 import b64encode
 from os import urandom
-from framework.cookie_handler import read_cookie
+from lib.cookie_handler import read_cookie
 
 
 class User(db.Model):

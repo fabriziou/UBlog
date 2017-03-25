@@ -1,9 +1,31 @@
-<div class="row">
-  <div class="col-sm-10 col-sm-offset-1">
-    <div class="post-content">
-      <p>{{ post.content }}</p>
-      <p><i class="fa fa-user-circle-o"></i> {{ post.parent().username }}</p>
-      <p class="text-right"><a href="/posts/like/{{post.key()}}">{{ nb_likes }} Like</a></p>
+{% if post %}
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1 post">
+      
+        <div class="post-content">
+          <!-- Post -->
+          {{ post.content|nl2br }}
+
+          <!-- Author -->
+          <div class="post-author text-right">
+            <h2><i class="fa fa-user-circle-o"></i> {{ post.parent().username }}</h2>
+            <p><span class="small">Member since {{ post.parent().creation_date.strftime("%B %Y") }} </span></p>
+          </div>
+
+          <!-- Extras -->
+          <p class="post-actions text-center">
+            <a href="#newcomment">
+              <i class="fa fa-comments-o"></i> {{ nb_comments }} comment{{'s' if nb_comments > 1 }}
+            </a>
+             ·
+            <span id="liked" class="{{ 'is_liked' if is_liked }}">
+              <a href="/posts/like/{{post.key()}}">
+                <i class="fa fa-heart"></i> {{ nb_likes }} like{{'s' if nb_likes > 1 }}
+              </a>
+            </span>
+          </p>
+        </div>
+
     </div>
   </div>
-</div>
+{% endif %}

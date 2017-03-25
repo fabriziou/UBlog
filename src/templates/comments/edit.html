@@ -4,9 +4,30 @@
   Edit your comment
 {% endblock%}
 
+{% block jumbotron %}
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h1 class="headline">Edit comment</h1>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <h1>Post {{ post.title }}</h1>
-  {% include "commons/posts/view.html" %}
-  {% include "commons/comments/list.html" %}
-  {% include "commons/comments/form.html" %}
+  <p>
+    <a href="/posts/view/{{comment.parent().key()}}#{{comment.key()}}" class="btn btn-primary">
+      <i class="fa fa-angle-left"></i> Back to post
+    </a>
+  </p>
+
+  <div class="alert alert-warning" role="alert">
+    <p><i class="fa fa-exclamation-triangle"></i> Your comment will be marked as edited</p>
+  </div>
+
+  <div class="form-comment">
+    <p class="comment-author">
+      <i class="fa fa-user-circle fa-lg"></i> {{ user.username }}
+    </p>
+    {% include "commons/form.html" %}
+  </div>
+
 {% endblock %}

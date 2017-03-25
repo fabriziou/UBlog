@@ -1,6 +1,6 @@
 from wtforms import Form, StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length
-from widgets.optional_icon_input import OptionalIconTextInput, OptionalIconPasswordInput
+from lib.widgets.optional_icon_input import OptionalIconTextInput, OptionalIconPasswordInput
 
 
 class LoginForm(Form):

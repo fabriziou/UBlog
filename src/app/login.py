@@ -1,8 +1,8 @@
-from framework.request_handler import Handler
+from lib.request_handler import Handler
+from lib.cookie_handler import create_cookie
 from wtforms.validators import ValidationError
 from forms.login import LoginForm
 from models.user import User
-from framework.cookie_handler import create_cookie
 
 
 class LoginPage(Handler):

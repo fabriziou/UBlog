@@ -1,16 +1,19 @@
 {% block navbar %}
   <nav class="navbar navbar-default">
     <div class="container">
+
       <div class="navbar-header">
         <a class="navbar-brand" href="/">Blog</a>
       </div>
+
+      <!-- Buttons -->
       {% if user %}
         <a href="/posts/add" class="btn btn-primary navbar-btn"><i class="fa fa-plus"></i> New Post</a>
       {% else %}
         <a href="/register" class="btn btn-primary navbar-btn pull-right">Sign up</a>
       {% endif %}
+
       <ul class="nav navbar-nav navbar-right">
-        {### USER MENU ###}
         {% if user %}
           <li><a href="/posts"><i class="fa fa-th-list"></i> Posts</a></li>
           <li><a href="/posts"><i class="fa fa-user-circle"></i> {{ user.username }}</a></li>

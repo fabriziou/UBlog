@@ -1,4 +1,4 @@
-from framework.request_handler import Handler
+from lib.request_handler import Handler
 
 
 class LogoutPage(Handler):

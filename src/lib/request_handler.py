@@ -2,15 +2,19 @@ import os
 from jinja2 import Environment, FileSystemLoader
 from webapp2 import RequestHandler, HTTPException
 from models.user import User
+from lib.filters.nl2br import nl2br
 
+template_dir = os.path.join(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)),
+    'templates')
+
+# autoescape = True
+jinja_env = Environment(loader=FileSystemLoader(template_dir),
+                        autoescape=True)
+
+jinja_env.filters["nl2br"] = nl2br
 
 class Handler(RequestHandler):
-    template_dir = os.path.join(
-        os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)),
-        'templates')
-    # autoescape = True
-    jinja_env = Environment(loader=FileSystemLoader(template_dir),
-                            autoescape=True)
 
     def __init__(self, request=None, response=None):
         RequestHandler.__init__(self, request, response)
@@ -36,7 +40,7 @@ class Handler(RequestHandler):
             :param template:
                 HTML file to render
         """
-        jinja_template = self.jinja_env.get_template(template)
+        jinja_template = jinja_env.get_template(template)
         html_from_template = jinja_template.render(kw, errors=self.errors,
                                                    user=self.user)
         self.response.out.write(html_from_template)

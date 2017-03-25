@@ -1,7 +1,7 @@
 from wtforms import Form, StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length, EqualTo, Regexp
 from validators.users import UsernameIsUnique, EmailIsUnique
-from widgets.optional_icon_input import OptionalIconTextInput, OptionalIconPasswordInput
+from lib.widgets.optional_icon_input import OptionalIconTextInput, OptionalIconPasswordInput
 
 
 class RegistrationForm(Form):

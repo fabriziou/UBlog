@@ -1,5 +1,5 @@
-from framework.request_handler import Handler
-from framework.cookie_handler import create_cookie
+from lib.request_handler import Handler
+from lib.cookie_handler import create_cookie
 from forms.registration import RegistrationForm
 from models.user import User
 
@@ -28,7 +28,7 @@ class RegistrationPage(Handler):
                 cookie = create_cookie("uid", user_key)
                 self.response.headers.add_header("Set-Cookie", cookie)
                 self.redirect_to("home")
-                
+
         self.render_signup(form)
 
     def render_signup(self, form):

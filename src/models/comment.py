@@ -74,19 +74,6 @@ class Comment(db.Model):
         return comment.put()
 
     @classmethod
-    def get_nb_comments(cls, post):
-        """ Get number of comments of a post
-
-            :param post:
-                Post entity
-            :returns:
-                Number of comments of a given post
-        """
-        comments = cls.all().ancestor(post).filter("is_deleted", False)
-
-        return comments.count()
-
-    @classmethod
     def get_comments_per_posts(cls, posts):
         """ Get the number of comments for a given list of posts
 
@@ -99,6 +86,6 @@ class Comment(db.Model):
         comments = {}
 
         for post in posts:
-            comments[post.key()] = cls.get_nb_comments(post)
+            comments[post.key()] = cls.get_all_by_post(post).count()
 
         return comments

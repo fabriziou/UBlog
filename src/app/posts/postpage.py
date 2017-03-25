@@ -1,4 +1,4 @@
-from framework.request_handler import Handler
+from lib.request_handler import Handler
 from models.post import Post
 from models.comment import Comment
 from models.like import Like
@@ -9,6 +9,7 @@ class PostPage(Handler):
     comments = None
     user_comment = None
     nb_likes = 0
+    nb_comments = 0
 
     @staticmethod
     def is_post_valid(func):
@@ -31,13 +32,14 @@ class PostPage(Handler):
 
             self.comments = Comment.get_all_by_post(self.post)
             self.nb_likes = Like.get_nb_like(self.post)
+            self.nb_comments = self.comments.count()
 
             # Not all GET() and POST() takes a comment_key params
             if comment_key:
                 return func(self, post_key, comment_key)
             else:
                 return func(self, post_key)
-                
+
         return is_valid
 
     @staticmethod
@@ -94,13 +96,12 @@ class PostPage(Handler):
         self.render("posts/add.html", form=form)
 
     def render_editpost(self, form):
-        self.render("posts/edit.html", form=form)
+        self.render("posts/edit.html", form=form, post=self.post)
 
     def render_viewpost(self, form, is_liked):
         self.render("posts/view.html", form=form, is_liked=is_liked,
-                    nb_likes=self.nb_likes, post=self.post,
-                    comments=self.comments)
+                    nb_likes=self.nb_likes, nb_comments=self.nb_comments,
+                    post=self.post, comments=self.comments)
 
     def render_editcomment(self, form):
-        self.render("comments/edit.html", form=form,
-                    post=self.post, comments=self.comments)
+        self.render("comments/edit.html", form=form, comment=self.user_comment)

@@ -1,4 +1,4 @@
-from framework.request_handler import Handler
+from lib.request_handler import Handler
 from app.posts.postpage import PostPage
 from models.post import Post
 from models.like import Like

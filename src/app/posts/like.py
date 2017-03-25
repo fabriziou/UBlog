@@ -1,4 +1,4 @@
-from framework.request_handler import Handler
+from lib.request_handler import Handler
 from app.posts.postpage import PostPage
 from models.post import Post
 from models.like import Like
@@ -22,7 +22,7 @@ class LikePost(PostPage):
                 success = Like.delete_like(like_key)
 
             if success:
-                self.redirect_to("viewpost", post_key=post_key)
+                self.redirect_to("viewpost", post_key=post_key, _fragment="liked")
             else:
                 self.abort(404)
 
