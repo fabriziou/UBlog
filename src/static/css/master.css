@@ -3954,11 +3954,11 @@ tbody.collapse.in {
     color: #ccc;
     background-color: transparent; }
   .navbar-default .navbar-toggle {
-    border-color: #ddd; }
+    border-color: #1d4f73; }
     .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-      background-color: #ddd; }
+      background-color: #1d4f73; }
     .navbar-default .navbar-toggle .icon-bar {
-      background-color: #888; }
+      background-color: #fff; }
   .navbar-default .navbar-collapse,
   .navbar-default .navbar-form {
     border-color: transparent; }
@@ -5860,6 +5860,7 @@ hr {
   .top-page .jumbotron hr {
     border-color: #222222; }
     .top-page .jumbotron hr + p {
+      font-size: 16px;
       margin: -16px 0 0 0; }
 
 .form, .post-summarize, .comment-content {
@@ -5935,3 +5936,12 @@ hr {
   .post .post-content .is_liked a {
     color: #d35245;
     font-weight: bold; }
+
+@media screen and (max-width: 767px) {
+  .navbar-toggle {
+    background-color: #1d4f73;
+    box-shadow: 0; }
+  .navbar-btn {
+    margin-left: 0 !important;
+    display: block;
+    width: 100%; } }

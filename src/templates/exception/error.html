@@ -7,10 +7,10 @@
 
 {% block jumbotron %}
   <div class="row text-center">
-    <div class="col-sm-12">
+    <div class="col-xs-12">
       <h1 class="headline">Oops! An error occured</h1>
       <p>
-        {% if debug %}
+        {% if debug and exception %}
           {{ exception }}
         {% endif %}
       </p>

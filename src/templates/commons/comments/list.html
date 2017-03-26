@@ -2,7 +2,7 @@
   <h2>Comments</h2>
   <div class="row comments">
     {% for comment in comments %}
-      <div class="col-sm-12 comment {{ 'is_author' if comment.user.key() == post.parent().key() }}" id="{{comment.key()}}">
+      <div class="col-xs-12 comment {{ 'is_author' if comment.user.key() == post.parent().key() }}" id="{{comment.key()}}">
         <div class="comment-content">
           <!-- Author -->
           <p class="comment-author">

@@ -27,8 +27,13 @@ app = WSGIApplication([
 
     # /comments
     Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/"
-          + "edit/<comment_key:[a-zA-Z0-9-_]+>",
+          + r"edit/<comment_key:[a-zA-Z0-9-_]+>",
           handler="app.posts.comments.edit.EditComment", name="editcomment"),
-    Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/delete/<comment_key:[a-zA-Z0-9-_]+>",
-          handler="app.posts.comments.delete.DeleteComment", name="deletecomment")
+    Route(r"/posts/<post_key:[a-zA-Z0-9-_]+>/comments/"
+          + r"delete/<comment_key:[a-zA-Z0-9-_]+>", name="deletecomment",
+          handler="app.posts.comments.delete.DeleteComment"),
+
+    # /user
+    Route(r"/posts/user/<user_key:[a-zA-Z0-9-_]+>", name="user",
+          handler="app.posts.user.UserPosts")
 ], debug=True)

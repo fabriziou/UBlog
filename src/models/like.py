@@ -37,7 +37,7 @@ class Like(db.Model):
 
     @classmethod
     def is_liked_by_user(cls, user, post):
-        """ Let you know if a post is liked by a given user
+        """ Check if a post is liked by user
 
             :param user:
                 User entity
@@ -69,7 +69,7 @@ class Like(db.Model):
         return likes.count()
 
     @classmethod
-    def get_likes_per_posts(cls, posts):
+    def get_nb_likes_per_posts(cls, posts):
         """ Get the number of likes for a given list of posts
 
             :param posts:
@@ -82,5 +82,5 @@ class Like(db.Model):
 
         for post in posts:
             likes[post.key()] = cls.get_nb_like(post)
-            
+
         return likes

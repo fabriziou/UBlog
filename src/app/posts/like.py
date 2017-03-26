@@ -22,10 +22,10 @@ class LikePost(PostPage):
                 success = Like.delete_like(like_key)
 
             if success:
-                self.redirect_to("viewpost", post_key=post_key, _fragment="liked")
+                self.redirect_to("viewpost", post_key=post_key,
+                                 _fragment="liked")
             else:
                 self.abort(500)
 
         else:
-            self.errors.append("You can't like your own post")
-            self.abort(404)
+            self.abort(404, "You can't like your own post")

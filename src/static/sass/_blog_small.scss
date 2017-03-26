@@ -1,0 +1,12 @@
+@media screen and (max-width: $screen-xs-max) {
+  .navbar-toggle {
+    background-color: $blue-darker;
+    box-shadow: 0;
+  }
+
+  .navbar-btn {
+    margin-left: 0 !important;
+    display: block;
+    width: 100%;
+  }
+}

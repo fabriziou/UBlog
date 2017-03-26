@@ -7,12 +7,12 @@ from lib.filters.nl2br import nl2br
 template_dir = os.path.join(
     os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)),
     'templates')
-
 # autoescape = True
 jinja_env = Environment(loader=FileSystemLoader(template_dir),
                         autoescape=True)
-
+# nl2br is added to filters
 jinja_env.filters["nl2br"] = nl2br
+
 
 class Handler(RequestHandler):
 
@@ -34,7 +34,7 @@ class Handler(RequestHandler):
         self.render("exception/error.html", exception=exception, debug=debug)
 
     def render(self, template, **kw):
-        """Render the HTML page
+        """ Render the HTML page
 
             :param template:
                 HTML file to render

@@ -12,7 +12,7 @@ class DeleteComment(PostPage):
         """ Delete a comment
 
             :param post_key:
-                Post to which the comment belongs to
+                Post which the comment belongs to
             :param comment_key:
                 Comment to delete
         """

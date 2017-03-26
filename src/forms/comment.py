@@ -6,6 +6,6 @@ class CommentForm(Form):
     content = TextAreaField("Comment",
                             [InputRequired(),
                              Length(min=5)],
-                             id="comment")
+                            id="comment")
 
     submit = SubmitField()

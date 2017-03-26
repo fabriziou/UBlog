@@ -21,51 +21,9 @@ class Post(db.Model):
             :returns:
                 Post entity
         """
-        post = cls(parent=user, title=title, content=content, user=user)
+        post = cls(parent=user, title=title, content=content)
 
         return post.put()
-
-    @classmethod
-    def get_all(cls, user=None, order_by="-creation_date"):
-        """ Return posts that are not deleted
-
-            :param user:
-                User entity
-            :param order_by:
-                Property to sort on
-            :param limit:
-                Number of posts we want to retrieve
-            :param offset:
-                Optional number of results to skip first
-            :returns:
-                List of Posts
-        """
-        res = cls.all()
-
-        if user:
-            res = res.ancestor(user)
-
-        res = res.filter("is_deleted", False).order(order_by)
-
-        return res
-
-    @classmethod
-    def get_nb_posts(cls, user=None):
-        """ Get number of posts
-
-            :param user:
-                User entity
-            :returns:
-                Number of posts
-        """
-        posts = cls.all()
-
-        if user:
-            posts = posts.ancestor(user)
-
-        posts = posts.filter("is_deleted", False)
-
-        return posts.count()
 
     @staticmethod
     def update_post(post, title, content):
@@ -97,3 +55,41 @@ class Post(db.Model):
         post.is_deleted = True
 
         return post.put()
+
+    @classmethod
+    def get_all(cls, user=None, order_by="-creation_date"):
+        """ Return posts that are not deleted
+
+            :param user:
+                User entity
+            :param order_by:
+                Property to sort on
+            :returns:
+                List of Posts
+        """
+        res = cls.all()
+
+        if user:
+            res = res.ancestor(user)
+
+        res = res.filter("is_deleted", False).order(order_by)
+
+        return res
+
+    @classmethod
+    def get_nb_posts(cls, user=None):
+        """ Get number of posts
+
+            :param user:
+                User entity
+            :returns:
+                Number of posts
+        """
+        posts = cls.all()
+
+        if user:
+            posts = posts.ancestor(user)
+
+        posts = posts.filter("is_deleted", False)
+
+        return posts.count()

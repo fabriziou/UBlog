@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-  Your posts
+  {{ userposts.username }}'s posts
 {% endblock%}
 
 {% block jumbotron %}
   <div class="row text-center">
     <div class="col-xs-12">
-      <h1 class="headline">Your posts</h1>
+      <h1 class="headline">{{ userposts.username }}</h1>
+      <p>Posts written by this user</p>
     </div>
   </div>
 {% endblock %}

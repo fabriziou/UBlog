@@ -82,6 +82,7 @@ hr {
       border-color: $gray-darker;
 
       &+p {
+        font-size: $font-size-base;
         margin: -$padding-large-horizontal 0 0 0;
       }
     }

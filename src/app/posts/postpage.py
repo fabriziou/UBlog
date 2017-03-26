@@ -16,7 +16,7 @@ class PostPage(Handler):
         """ Check if post is valid
 
         If post is valid,
-            comments and nb likes from this post are retrieved
+            comments and nb likes/comments from this post are retrieved
 
         An error is thrown if :
             * Post Unknown
