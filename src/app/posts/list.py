@@ -10,20 +10,17 @@ class ListPosts(PostPage):
 
     @Handler.login_required(True)
     def get(self):
-        page_id = None
-        if (self.request.GET.get('p') and
-             self.request.GET.get('p').isdigit()):
-            page_id = int(self.request.GET.get('p'))
-
         posts = Post.get_all(user=self.user)
+        pagination = Pagination(self.request.GET.get('p'), posts.count())
 
-        pagination = Pagination(page_id, total_posts=posts.count())
+        if pagination.is_valid():
+            posts = posts.fetch(limit=pagination.posts_per_page,
+                                 offset=pagination.offset)
 
-        posts = posts.fetch(limit=pagination.posts_per_page,
-                             offset=pagination.offset)
+            nb_likes = Like.get_likes_per_posts(posts)
+            nb_comments = Comment.get_comments_per_posts(posts)
 
-        nb_likes = Like.get_likes_per_posts(posts)
-        nb_comments = Comment.get_comments_per_posts(posts)
-
-        self.render("posts/list.html", posts=posts, nb_likes=nb_likes,
-                    nb_comments=nb_comments, pagination=pagination)
+            self.render("posts/list.html", posts=posts, nb_likes=nb_likes,
+                        nb_comments=nb_comments, pagination=pagination)
+        else:
+            self.abort(404, "Invalid page number")
