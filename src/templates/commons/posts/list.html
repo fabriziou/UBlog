@@ -36,7 +36,7 @@
             <i class="fa fa-comments-o"></i> {{ nb_comments[post.key()] }} comment{{'s' if nb_comments[post.key()] > 1 }}
           </p>
           <p class="text-right small">
-            <i class="fa fa-user-circle"></i> {{ post.parent().username }}
+            <i class="fa fa-user-circle"></i> <a href="/posts/user/{{post.parent().key()}}">{{ post.parent().username }}</a>
           </p>
 
           {% if user and post.parent().key() == user.key() %}

@@ -22,8 +22,8 @@
 
         <ul class="nav navbar-nav navbar-right">
           {% if user %}
-            <li><a href="/posts"><i class="fa fa-th-list"></i> Posts</a></li>
-            <li><a href=""><i class="fa fa-user-circle"></i> {{ user.username }}</a></li>
+            <li><a href="/"><i class="fa fa-th-list"></i> Posts</a></li>
+            <li><a href="/posts"><i class="fa fa-user-circle"></i> {{ user.username }}</a></li>
             <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
           {% else %}
             <li><a href="/login">Log in</a></li>

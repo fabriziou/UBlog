@@ -6,7 +6,7 @@
         <div class="comment-content">
           <!-- Author -->
           <p class="comment-author">
-            <i class="fa fa-user-circle fa-lg"></i> {{ comment.user.username }}
+            <i class="fa fa-user-circle fa-lg"></i> <a href="/posts/user/{{comment.user.key()}}">{{ comment.user.username }}</a>
 
             {% if user %}
               {% if comment.user.key() == user.key() %}
@@ -23,7 +23,7 @@
             {{ comment.content|nl2br }}
             <footer>
               {{ comment.creation_date.strftime("%d %B %Y, %H:%M") }}
-              {% if comment.creation_date != comment.last_modification %}
+              {% if comment.creation_date.strftime("%d %B %Y, %H:%M") != comment.last_modification.strftime("%d %B %Y, %H:%M") %}
                 - Edited on {{ comment.last_modification.strftime("%d %B %Y, %H:%M") }}
               {% endif %}
             </footer>
