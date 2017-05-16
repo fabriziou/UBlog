@@ -24,11 +24,9 @@
 
           <h3 class="headline"><a href="/posts/view/{{ post.key() }}">{{ post.title }}</a></h3>
 
-          <p>
-            {{ post.content|truncate(250, False, '...')|nl2br }}
-          </p>
+          {{ post.content|truncate(250, False, '...')|nl2br }}
           <p class="text-right">
-            <a href="/posts/view/{{ post.key() }}" alt="Link to article {{post.title}}">Read more</a>
+            <a href="/posts/view/{{ post.key() }}" title="Link to article">Read more</a>
           </p>
 
           <p class="small">
